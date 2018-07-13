@@ -19,12 +19,13 @@ func JWTInit() {
 	jwtMiddleware := jwtmiddleware.New(
 		jwtmiddleware.Options{
 			ValidationKeyGetter: func(token *jwt.Token) (interface{}, error) {
+				//varify audience
 				aud := os.Getenv("AUTH0_API_AUDIENCE")
 				checkAudience := token.Claims.(jwt.MapClaims).VerifyAudience(aud, false)
 				if !checkAudience {
 					return token, errors.New("Invalid audience")
 				}
-				//varify audience
+				//varify issuer
 				iss := os.Getenv("AUTH0_DOMAIN")
 				checkIss := token.Claims.(jwt.MapClaims).VerifyIssuer(iss, false)
 				if !checkIss {
@@ -52,7 +53,7 @@ func AuthMiddleware() gin.HandlerFunc {
 			c.Abort()
 			c.Writer.WriteHeader(http.StatusUnauthorized)
 			c.Writer.Write([]byte("Unauthorized"))
-
 		}
+
 	}
 }

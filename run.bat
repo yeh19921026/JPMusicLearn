@@ -2,5 +2,6 @@ SET AUTH0_API_CLIENT_SECRET=9UrMjECNTus6JUxEyhPEP_wwYKUhfMktfJ1SiagFoMOyORfKJ7Pt
 SET AUTH0_CLIENT_ID=KF8oNwg3qrbhlT5pMeuJ5OL0IAiIt5PZ
 SET AUTH0_DOMAIN=https://tses.auth0.com/
 SET AUTH0_API_AUDIENCE=https://tses.auth0.com/api/v2/
+SET DATABASE_NAME=JPMusicLearn
 
 go run main.go

@@ -1,6 +1,7 @@
 package dbmgo
 
 type Person struct {
-	Name  string
-	Phone string
+	//uuid
+	Subject string
+	Phone   string
 }

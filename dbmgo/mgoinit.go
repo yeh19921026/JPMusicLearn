@@ -1,35 +1,31 @@
 package dbmgo
 
 import (
-	"fmt"
-	"log"
+	"os"
 
-	"gopkg.in/mgo.v2"
-	"gopkg.in/mgo.v2/bson"
+	mgo "gopkg.in/mgo.v2"
+)
+
+var (
+	mgodatabase *mgo.Database
+	Mongo       *mgo.DialInfo
 )
 
 func MgoInit() error {
 	session, err := mgo.Dial("127.0.0.1")
 	if err != nil {
 		panic(err)
+		return err
 	}
-	defer session.Close()
+	//defer session.Close()
 
 	// Optional. Switch the session to a monotonic behavior.
 	session.SetMode(mgo.Monotonic, true)
 
-	c := session.DB("test").C("people")
-	err = c.Insert(&Person{"Ale", "+55 53 8116 9639"},
-		&Person{"Cla", "+55 53 8402 8510"})
-	if err != nil {
-		log.Fatal(err)
-	}
+	mgodatabase = session.DB(os.Getenv("DATABASE_NAME"))
 
-	result := Person{}
-	err = c.Find(bson.M{"name": "Ale"}).One(&result)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println("Phone:", result.Phone)
+	return nil
 }
+
+//example http://www.01happy.com/golang-mongodb-find-demo/
+//https://gist.github.com/ardan-bkennedy/9198289

@@ -2,6 +2,12 @@
 
 
 [[projects]]
+  name = "github.com/astaxie/beego"
+  packages = ["logs"]
+  revision = "bf5c5626ab429e66d88602e1ab1ab5fbf4629a01"
+  version = "v1.9.2"
+
+[[projects]]
   branch = "master"
   name = "github.com/auth0/go-jwt-middleware"
   packages = ["."]
@@ -72,6 +78,18 @@
   version = "v8.18.2"
 
 [[projects]]
+  branch = "v2"
+  name = "gopkg.in/mgo.v2"
+  packages = [
+    ".",
+    "bson",
+    "internal/json",
+    "internal/sasl",
+    "internal/scram"
+  ]
+  revision = "9856a29383ce1c59f308dd1cf0363a79b5bef6b5"
+
+[[projects]]
   name = "gopkg.in/yaml.v2"
   packages = ["."]
   revision = "5420a8b6744d3b0345ab293f6fcba19c978f1183"
@@ -80,6 +98,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "9278c286b5e16c3c8e8e5d0271c0c2e3eaec57f9ddd2af21946c92b449cb4179"
+  inputs-digest = "fcf843e2a45cdecbd5e464b0d4977bce17d513d450492909fcab5ec93163e31e"
   solver-name = "gps-cdcl"
   solver-version = 1

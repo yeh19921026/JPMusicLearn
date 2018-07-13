@@ -28,12 +28,6 @@ class App extends React.Component {
     setup() {
         $.ajaxSetup({
             beforeSend: (r) => {
-
-                console.log(localStorage.getItem("access_token"))
-                console.log(localStorage.getItem("id_token"))
-                console.log(localStorage.getItem("profile"))
-
-
                 if (localStorage.getItem("access_token")) {
                     r.setRequestHeader(
                         "Authorization",
@@ -58,8 +52,10 @@ class App extends React.Component {
     }
     render() {
         if (this.loggedIn) {
+            console.log("return (<LoggedIn />);")
             return (<LoggedIn />);
         } else {
+            console.log("return (<Home />);")
             return (<Home />);
         }
     }
@@ -73,7 +69,7 @@ class Home extends React.Component {
         this.WebAuth = new auth0.WebAuth({
             domain: AUTH0_DOMAIN,
             clientID: AUTH0_CLIENT_ID,
-            scope: "openid profile",
+            scope: "openid profile email",
             audience: AUTH0_API_AUDIENCE,
             responseType: "token id_token",
             redirectUri: AUTH0_CALLBACK_URL
@@ -115,6 +111,7 @@ class LoggedIn extends React.Component {
             this.setState({
                 jokes: res
             });
+            console.log(this.state);
         });
     }
     componentDidMount() {
@@ -166,15 +163,16 @@ class Joke extends React.Component {
         );
     }
     render() {
+        console.log(this.props.joke)
         return (
             <div className="col-xs-4">
                 <div className="panel panel-default">
-                    <div className="panel-heading">#{this.props.joke.id} <span className="pull-right">{this.state.liked}</span></div>
+                    <div className="panel-heading">#{this.props.joke.id} <span className="pull-right">{this.state.like}</span></div>
                     <div className="panel-body">
-                        {this.props.joke.joke}
+                        {this.props.joke.data}
                     </div>
                     <div className="panel-footer">
-                        {this.props.joke.likes} Likes &nbsp;
+                        {this.props.joke.like} Likes &nbsp;
                   <a onClick={this.like} className="btn btn-default">
                             <span className="glyphicon glyphicon-thumbs-up"></span>
                         </a>
