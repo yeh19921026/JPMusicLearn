@@ -101,3 +101,10 @@
 ### 留言板
 
 是否要有留言版功能?
+
+## Jade
+
+目前使用nodejs的Jade做html的原型頁面，再將元件拆分至前端的React中
+更多資訊請查看http://jade-lang.com
+
+未來可能會更換為pug
