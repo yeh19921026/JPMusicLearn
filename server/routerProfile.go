@@ -23,7 +23,7 @@ func init() {
 	}
 
 	countryClient = client
-	countryClient.MapByRegion()
+	countryClient.MapByRegion("AA")
 }
 
 type Profile struct {
@@ -49,7 +49,7 @@ func ProfileHandler(c *gin.Context) {
 	if err != nil {
 		fmt.Println(err)
 	}
-	main.Bglog.info("result = ", result)
+	//main.Bglog.info("result = ", result)
 	c.JSON(http.StatusOK, result)
 }
 

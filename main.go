@@ -1,7 +1,6 @@
 package main
 
 import (
-	"test/golang-gin-react/command"
 	"test/golang-gin-react/dbmgo"
 
 	"github.com/astaxie/beego/logs"
@@ -13,7 +12,7 @@ var Bglog *logs.BeeLogger
 func main() {
 	dbmgo.MgoInit()
 	dbmgo.TestType()
-	command.Init()
+	//command.init()
 }
 
 func logInit() {

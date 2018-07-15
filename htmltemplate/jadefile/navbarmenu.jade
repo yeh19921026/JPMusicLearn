@@ -1,0 +1,18 @@
+mixin navitem(hrf,txt)
+  li.nav-item
+    a.nav-link(href=hrf)= txt
+        block
++navitem('#', '登入')
+    span.badge.badge-warning !
++navitem('#', '歌曲列表')
+//-li(class="nav-item")
+    a(class='nav-link',href='#') 登入
+//-li(class="nav-item")
+    a(class='nav-link',href='#') 歌曲列表
+//-li(class="nav-item active")
+    a(class='nav-link', href='#')
+        span(class='sr-only') current
+//-li(class="nav-item")
+    a(class='nav-link',href='#') Link
+//-li(class="nav-item")
+    a(class='nav-link disabled', href='#') Disabled
