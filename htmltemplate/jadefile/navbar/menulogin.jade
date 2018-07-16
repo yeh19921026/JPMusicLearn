@@ -1,20 +1,22 @@
 //-li(class="nav-item")
-    a(class='nav-link',href='#') 個人檔案
-        span(class='badge badge-warning') !
+  a(class='nav-link',href='#') 個人檔案
+    span(class='badge badge-warning') !
 //-li(class="nav-item")
-    a(class='nav-link',href='#') 歌曲列表
+  a(class='nav-link',href='#') 歌曲列表
 //-li(class="nav-item")
-    a(class='nav-link',href='#') 我的最愛
+  a(class='nav-link',href='#') 我的最愛
 //-li(class="nav-item")
-    a(class='nav-link',href='#') 播放紀錄
+  a(class='nav-link',href='#') 播放紀錄
 //-li(class="nav-item")
-    a(class='nav-link',href='#') 播放清單
+  a(class='nav-link',href='#') 播放清單
 mixin navitem(hrf,txt)
   li.nav-item
-    a.nav-link(href=hrf)= txt
-        block
+  a.nav-link(href=hrf)= txt
+    block
 
 +navitem('#', '個人檔案')
+  if isvarified
+  else
     span.badge.badge-warning !
 +navitem('#', '歌曲列表')
 +navitem('#', '我的最愛')

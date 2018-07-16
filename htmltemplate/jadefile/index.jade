@@ -1,13 +1,18 @@
 - var login = true
+- var page = 'home'
+- var isvarified = true
 doctype html
 html
-    head
-        meta(charset="UTF-8")
-        meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
-        title Jokeish App
-        include headscripts.jade
-    body
-        #app
-            include navbar.jade
-            include indexcontainer.jade
-        include bodyscripts.jade
+  head
+    meta(charset="UTF-8")
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    title Jokeish App
+    include headscripts.jade
+  body
+    #app
+      include navbar\container.jade
+      if page == 'home'
+        include home\container.jade
+      else if page == 'profile'
+        include profile\container.jade
+    include bodyscripts.jade
