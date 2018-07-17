@@ -1,5 +1,5 @@
 - var login = true
-- var page = 'home'
+- var page = 'profile'//-home,profile
 - var isvarified = true
 doctype html
 html
@@ -11,8 +11,7 @@ html
   body
     #app
       include navbar\container.jade
-      if page == 'home'
-        include home\container.jade
-      else if page == 'profile'
-        include profile\container.jade
+      case page
+        when 'home': include home\container.jade
+        when 'profile': include profile\container.jade
     include bodyscripts.jade
