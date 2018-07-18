@@ -1,6 +1,8 @@
 - var login = true
-- var page = 'home'//-home,profile
+- var page = 'playlist'//-home,profile,playlist
 - var isvarified = false
+include mediaelement.jade
+include pageelement.jade
 doctype html
 html
   head
@@ -9,9 +11,9 @@ html
     title Jokeish App
     include headscripts.jade
   body
-    #app
-      include navbar\container.jade
-      case page
-        when 'home': include home\container.jade
-        when 'profile': include profile\container.jade
+    include navbar\container.jade
+    case page
+      when 'home': include home\container.jade
+      when 'profile': include profile\container.jade
+      when 'playlist': include playlist\container.jade
     include bodyscripts.jade
