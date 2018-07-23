@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Jokeish App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  </head>
+  <body>
+    <nav id="navGroup" class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark nav-fill">
+      <button data-parent="#navGroup" data-target="#navbarCollapse" data-toggle="collapse" type="button" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span class="fa fa-bars"></span></button>
+      <button data-parent="#navGroup" data-target="#searchbarCollapse" data-toggle="collapse" type="button" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span aria-hidden="true" class="fa fa-search"></span></button>
+      <div id="navbarCollapse" class="collapse navbar-collapse text-center"><a href="#" class="navbar-brand ml-lg-0 ml-3">JPMusicLearn</a>
+        <ul id="navbar-menu" class="navbar-nav">
+                    <li class="nav-item"></li><a href="#" class="nav-link">個人檔案<span class="badge badge-warning">!</span></a>
+                    <li class="nav-item"></li><a href="#" class="nav-link">歌曲列表</a>
+                    <li class="nav-item"></li><a href="#" class="nav-link">我的最愛</a>
+                    <li class="nav-item"></li><a href="#" class="nav-link">播放紀錄</a>
+                    <li class="nav-item"></li><a href="#" class="nav-link">播放清單</a>
+        </ul>
+      </div>
+      <div id="searchbarCollapse" class="collapse navbar-collapse">
+        <form class="nav-item input-group mt-2 mt-md-0">
+          <input type="text" aria-label="Search" placeholder="搜尋" class="form-control mr-sm-2">
+          <button type="submit" class="btn btn-outline-success my-2 my-sm-0">搜尋</button>
+        </form>
+      </div>
+    </nav>
+    <div class="container mt-5 pt-2 pt-lg-3">
+      <div class="row">
+        <div class="col-12 col-md-2"><img id="userphoto" data-src="holder.js/100x100?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=userphoto" alt="使用者頭貼" class="mr-3 img-responsive center-block"></div>
+        <div class="col-12 col-md-10">
+          <form id="editProfile">
+            <div class="form-group row">
+              <label for="name" class="col-md-2 col-form-label">名稱</label>
+              <div class="col-md-10">
+                <input id="name" type="text" readonly="" value="UserName" class="form-control-plaintext">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="email" class="col-md-2 col-form-label">信箱</label>
+              <div class="col-md-10">
+                <input id="email" type="text" readonly="" value="email@example.com" class="form-control-plaintext">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="nickName" class="col-md-2 col-form-label">暱稱</label>
+              <div class="col-md-10">
+                <input id="nickName" name="nickname" type="text" placeholder="暱稱" class="form-control">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="birthday" class="col-md-2 col-form-label">生日</label>
+              <div class="col-md-10">
+                <input id="birthday" name="bday" type="date" min="1900-01-01" max="2018-01-01" class="form-control">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="gender" class="col-md-2 col-form-label">生理性別</label>
+              <div class="col-md-10 row ml-1">
+                <div class="form-check col-4 col-md-2">
+                  <input id="male" name="gender" type="radio" value="male" checked="" class="form-check-input">
+                  <label for="male" class="form-check-label">男性  </label>
+                </div>
+                <div class="form-check col-4 col-md-2">
+                  <input id="female" name="gender" type="radio" value="female" class="form-check-input">
+                  <label for="female" class="form-check-label">女性  </label>
+                </div>
+                <div class="form-check col-4 col-md-2">
+                  <input id="other" name="gender" type="radio" value="other" class="form-check-input">
+                  <label for="other" class="form-check-label">其他  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="JLPTLevel" class="col-md-2 col-form-label">日檢等級</label>
+              <div class="col-md-10">
+                <select id="JLPTLevel" name="jlptlevel" class="form-control">
+                  <option selected value="unselect">選擇日檢等級</option>
+                  <option value="N5">N5</option>
+                  <option value="N4">N4</option>
+                  <option value="N3">N3</option>
+                  <option value="N2">N2</option>
+                  <option value="N1">N1</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">更新個人檔案</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://cdn.auth0.com/js/auth0/9.0/auth0.min.js"></script>
+    <script src="https://unpkg.com/react@16.0.0/umd/react.production.min.js" type="application/javascript"></script>
+    <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.production.min.js" type="application/javascript"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js" type="application/javascript"></script>
+    <script src="js/app.jsx" type="text/babel"></script>
+    <link href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" rel="stylesheet" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/holder/2.9.4/holder.min.js"></script>
+  </body>
+</html>

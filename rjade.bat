@@ -1,2 +1,2 @@
 rem go run .\main.go j %*
-jade %* -o htmltemplate\htmlfile\ -P
+jade %* -o doc\ -P

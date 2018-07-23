@@ -1,5 +1,5 @@
 - var login = true
-- var page = 'playlist'//-home,profile,playlist
+- var page = 'home'//-home,profile,playlist,songpage
 - var isvarified = false
 include mediaelement.jade
 include pageelement.jade
@@ -16,4 +16,5 @@ html
       when 'home': include home\container.jade
       when 'profile': include profile\container.jade
       when 'playlist': include playlist\container.jade
+      when 'songpage': include songpage\container.jade
     include bodyscripts.jade

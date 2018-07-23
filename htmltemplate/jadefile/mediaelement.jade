@@ -4,6 +4,8 @@ mixin media(title,description)
       .col-12.col-md-6.col-lg-4
         img.mr-3.img-responsive.center-block.w-100(data-src='holder.js/1920x1080?theme=thumb&bg=55595c&fg=eceeef&text=youtube thumbnail&auto=yes', alt='youtube thumbnail')
       .col-12.col-md-6.col-lg-8
-        h4.mt-0.mb-(style="display:-webkit-box;-webkit-box-orient:vertica; -webkit-line-clamp:1; overflow:hidden; height:28.8px;")= title
+        h4.mt-0(style="display:-webkit-box;-webkit-box-orient:vertica; -webkit-line-clamp:1; overflow:hidden; height:28.8px;")= title
         h6.mb-0(style="display:-webkit-box;-webkit-box-orient:vertical; -webkit-line-clamp:5; overflow:hidden; height:96px;")= description
         font(color="#aaaaaa") 觀看次數：100,000．收藏人數1528．評價：4.2
+mixin img(w,h)
+  img.mr-3.img-responsive.center-block.w-100(data-src='holder.js/1920x1080?theme=thumb&bg=55595c&fg=eceeef&text=youtube thumbnail&auto=yes', alt='youtube thumbnail')
