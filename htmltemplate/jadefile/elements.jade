@@ -1,0 +1,29 @@
+mixin page
+	.btn-group.d-flex.justify-content-center.mb-4.mt-2.my-lg-(role='group', aria-label='page')
+		button.btn.btn-outline-secondary(type='button') 
+			i.fas.fa-chevron-left
+		button.btn.btn-outline-secondary(type='button') 11
+		button.btn.btn-outline-secondary(type='button') 22
+		button.btn.btn-outline-secondary(type='button') 33
+		button.btn.btn-outline-secondary(type='button') 44
+		button.btn.btn-outline-secondary(type='button') 55
+		button.btn.btn-outline-secondary(type='button') 
+			i.fas.fa-chevron-right
+mixin media(title,description)
+	li.mb-3.card
+		.row
+			.col-12.col-md-6.col-lg-4
+				img.mr-3.img-responsive.center-block.w-100(data-src='holder.js/1920x1080?theme=thumb&bg=55595c&fg=eceeef&text=youtube thumbnail&auto=yes', alt='youtube thumbnail')
+			.col-12.col-md-6.col-lg-8
+				h4.mt-0(style="display:-webkit-box;-webkit-box-orient:vertica; -webkit-line-clamp:1; overflow:hidden; height:28.8px;")= title
+				h6.mb-0(style="display:-webkit-box;-webkit-box-orient:vertical; -webkit-line-clamp:5; overflow:hidden; height:96px;")= description
+				font(color="#aaaaaa") 觀看次數：100,000．收藏人數1528．評價：4.2
+mixin img(w,h)
+	img.mr-3.img-responsive.center-block.w-100(data-src='holder.js/1920x1080?theme=thumb&bg=55595c&fg=eceeef&text=youtube thumbnail&auto=yes', alt='youtube thumbnail')
+
+mixin rby( rbv , rtv )
+	ruby
+		rb= rbv
+		rp (
+		rt= rtv
+		rp )
