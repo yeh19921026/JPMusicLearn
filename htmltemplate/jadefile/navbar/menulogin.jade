@@ -14,11 +14,14 @@ mixin navitem(hrf,txt)
   a.nav-link(href=hrf)= txt
     block
 
-+navitem('#', '個人檔案')
++navitem('profile', '個人檔案')
   if isvarified
   else
     span.badge.badge-warning.ml-1 !
-+navitem('#', '歌曲列表')
++navitem('#playlist', '歌曲列表')
 +navitem('#', '我的最愛')
 +navitem('#', '播放紀錄')
-+navitem('#', '播放清單')
++navitem('playlist', '播放清單')
++navitem('addsong', '新增歌曲')
++navitem('song', '歌曲(暫時)')
++navitem('searchresult', '搜尋結果(暫時)')

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Jokeish App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  </head>
+  <body>
+    <nav id="navGroup" class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark nav-fill">
+      <button data-parent="#navGroup" data-target="#navbarCollapse" data-toggle="collapse" type="button" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span class="fa fa-bars"></span></button>
+      <button data-parent="#navGroup" data-target="#searchbarCollapse" data-toggle="collapse" type="button" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span aria-hidden="true" class="fa fa-search"></span></button>
+      <div id="navbarCollapse" class="collapse navbar-collapse text-center"><a href="home" class="navbar-brand ml-lg-0 ml-3">JPMusicLearn</a>
+        <ul id="navbar-menu" class="navbar-nav">
+                    <li class="nav-item"></li><a href="profile" class="nav-link">個人檔案<span class="badge badge-warning ml-1">!</span></a>
+                    <li class="nav-item"></li><a href="#playlist" class="nav-link">歌曲列表</a>
+                    <li class="nav-item"></li><a href="#" class="nav-link">我的最愛</a>
+                    <li class="nav-item"></li><a href="#" class="nav-link">播放紀錄</a>
+                    <li class="nav-item"></li><a href="playlist" class="nav-link">播放清單</a>
+                    <li class="nav-item"></li><a href="addsong" class="nav-link">新增歌曲</a>
+                    <li class="nav-item"></li><a href="song" class="nav-link">歌曲(暫時)</a>
+                    <li class="nav-item"></li><a href="searchresult" class="nav-link">搜尋結果(暫時)</a>
+        </ul>
+      </div>
+      <div id="searchbarCollapse" class="collapse navbar-collapse">
+        <form class="nav-item input-group mt-2 mt-md-0">
+          <input type="text" aria-label="Search" placeholder="搜尋" class="form-control mr-sm-2">
+          <button type="submit" class="btn btn-outline-success my-2 my-sm-0">搜尋</button>
+        </form>
+      </div>
+    </nav>
+    <div class="container mt-5 pt-2 pt-lg-3">
+      <h2 class="mb-3">新增歌曲</h2>
+      <form id="editProfile">
+        <div class="form-group row">
+          <label for="twName" class="col-md-2 col-form-label">中文名稱</label>
+          <div class="col-md-10">
+            <input id="twName" name="twName" type="text" , placeholder="請確認歌曲名稱是否正確，完成後無法修改" class="form-control">
+          </div>
+        </div>
+            <div class="form-group row">
+              <label for="jpName" class="col-md-2 col-form-label">日文名稱</label>
+              <div class="col-md-10">
+                <input id="jpName" name="jpName" type="text" placeholder="e.g. あああああああ" class="form-control">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="tag" class="col-md-2 col-form-label">標籤</label>
+              <div class="col-md-10">
+                <input id="tag" name="tag" type="text" placeholder="使用小寫逗號  , 分隔" class="form-control">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="uri" class="col-md-2 col-form-label">Youtube網址</label>
+              <div class="col-md-10">
+                <input id="uri" name="uri" type="text" placeholder="貼上原網址或短網址" class="form-control">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="songediter" class="col-md-2 col-form-label">作曲者</label>
+              <div class="col-md-10">
+                <input id="songediter" name="songediter" type="text" placeholder="作曲者" class="form-control">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="lyricsediter" class="col-md-2 col-form-label">作詞者</label>
+              <div class="col-md-10">
+                <input id="lyricsediter" name="lyricsediter" type="text" placeholder="作詞者" class="form-control">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="singer" class="col-md-2 col-form-label">演唱者</label>
+              <div class="col-md-10">
+                <input id="singer" name="singer" type="text" placeholder="演唱者" class="form-control">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="info" class="col-md-2 col-form-label">歌曲介紹</label>
+              <div class="col-md-10">
+                <textarea id="info" aria-label="leave comment" name="info" type="text" placeholder="歌曲介紹" class="form-control"></textarea>
+              </div>
+            </div>
+        <div class="form-group row">
+          <label for="lyrics" class="col-12 col-form-label">歌詞<span data-toggle="collapse" href="#lyricsRule" role="button" aria-expanded="false" aria-controls="lyricsRule" class="badge badge-warning m-1">點我打開歌詞輸入規則</span></label>
+          <div id="lyricsRule" class="collapse col-12 mb-3">
+            <div class="card card-body">
+              <h4>歌詞解析</h4>
+              <p>
+                歌詞會自動以一行日文一行中文做解析。<br>
+                如果是日文、中文、英文的歌詞可以在第一行加註。<font color="red">[jte]</font>，全文會自動以日文、中文、英文歌詞做解析。<br>
+                如果是多行日文或多行中文可以在行首加註<font color="red">[j] [t] [e]</font>。<br>
+              </p>
+              <h4>歌詞上標</h4>
+              <p>上標日文歌詞可以用兩種方法 <font color="red">1.漢字(假名) 2.[漢字,假名]</font>。<br>
+                如果是非漢字，如中文、英文要上標請使用。<font color="red">[文字,上標文字]</font>，e.g. <font color="red">[end,エンド]</font>
+              </p>
+              <h4>空行</h4>
+              <p>歌曲間隔可以在行首使用<font color="red">[hr]</font>做一個空行。<br>
+                可以在編輯歌詞的時候做無內容的空行方便檢視。
+              </p>
+              <h4>重複歌詞</h4>
+              <p>歌詞重複可以做<font color="red">[rps,1]</font>做重複的部分開頭，<font color="red">[rpe]</font>做重複的部分結尾，<font color="red">[rp,1]</font>重複第一段歌詞。<br>
+                重複歌詞不支援巢狀結構。<br>
+              </p>
+              <div class="row"><a data-toggle="collapse" href="#lyricsexample" role="button" aria-expanded="false" aria-controls="lyricsRule" class="btn btn-primary m-1">範例</a><a data-toggle="collapse" href="#lyricsRule" role="button" aria-expanded="false" aria-controls="lyricsRule" class="btn btn-primary m-1">收起</a></div>
+              <div id="lyricsexample" class="collapse col-12 mb-3">
+                <h4 class="mt-2">範例</h4>
+                <p>
+                  [jte] <br>
+                  日文[歌詞,上標]1<br>
+                  中文歌詞1<br>
+                  Verse 1<br>
+                  日文[歌詞,上標]2<br>
+                  中文歌詞2<br>
+                  Verse 2<br>
+                  オラオラオラオラ<br>
+                  [rps,1][j]日文[副歌,上標]1<br>
+                  中文副歌1<br>
+                  Chorus 1<br>
+                  日文[副歌,上標]2<br>
+                  中文副歌2<br>
+                  Chorus 2<br>
+                  [rpe]<br>
+                  [rp,1]<br>
+                </p>
+                <h4 class="mt-2">輸出</h4>
+                <hr>
+                <ul style="font-size:2.5vw" class="list-unstyled">
+                  <li class="text-center my-1">
+                     
+                    日文
+                        <ruby>
+                          <rb>歌詞</rb>
+                          <rp>(</rp>
+                          <rt>上標</rt>
+                          <rp>)</rp>
+                        </ruby>1
+                  </li>
+                  <li class="text-center my-1">中文歌詞1</li>
+                  <li class="text-center my-1">Verse 1</li>
+                  <hr>
+                  <li class="text-center my-1">
+                     
+                    日文
+                        <ruby>
+                          <rb>歌詞</rb>
+                          <rp>(</rp>
+                          <rt>上標</rt>
+                          <rp>)</rp>
+                        </ruby>2
+                  </li>
+                  <li class="text-center my-1">中文歌詞2</li>
+                  <li class="text-center my-1">Verse 2</li>
+                  <hr>
+                  <li class="text-center my-1">オラオラオラオラ</li>
+                  <hr>
+                  <li class="text-center my-1">
+                     
+                    日文
+                        <ruby>
+                          <rb>副歌</rb>
+                          <rp>(</rp>
+                          <rt>上標</rt>
+                          <rp>)</rp>
+                        </ruby>1
+                  </li>
+                  <li class="text-center my-1">中文副歌1</li>
+                  <li class="text-center my-1">Chorus 1</li>
+                  <hr>
+                  <li class="text-center my-1">
+                     
+                    日文
+                        <ruby>
+                          <rb>副歌</rb>
+                          <rp>(</rp>
+                          <rt>上標</rt>
+                          <rp>)</rp>
+                        </ruby>2
+                  </li>
+                  <li class="text-center my-1">中文副歌2</li>
+                  <li class="text-center my-1">Chorus 2</li>
+                  <hr>
+                  <li class="text-center my-1">
+                     
+                    日文
+                        <ruby>
+                          <rb>副歌</rb>
+                          <rp>(</rp>
+                          <rt>上標</rt>
+                          <rp>)</rp>
+                        </ruby>1
+                  </li>
+                  <li class="text-center my-1">中文副歌1</li>
+                  <li class="text-center my-1">Chorus 1</li>
+                  <hr>
+                  <li class="text-center my-1">
+                     
+                    日文
+                        <ruby>
+                          <rb>副歌</rb>
+                          <rp>(</rp>
+                          <rt>上標</rt>
+                          <rp>)</rp>
+                        </ruby>2
+                  </li>
+                  <li class="text-center my-1">中文副歌2</li>
+                  <li class="text-center my-1">Chorus 2</li>
+                  <hr>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <textarea id="lyrics" aria-label="leave comment" name="lyrics" type="text" placeholder="歌詞" class="form-control"></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">預覽</button>
+      </form>
+      <ul class="list-group my-5"><a class="list-group-item">目前檢視最新版本</a><a href="#" class="list-group-item list-group-item-primary">檢視2018年1月1日00:00版本</a></ul>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://cdn.auth0.com/js/auth0/9.0/auth0.min.js"></script>
+    <script src="https://unpkg.com/react@16.0.0/umd/react.production.min.js" type="application/javascript"></script>
+    <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.production.min.js" type="application/javascript"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js" type="application/javascript"></script>
+    <script src="js/app.jsx" type="text/babel"></script>
+    <link href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" rel="stylesheet" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/holder/2.9.4/holder.min.js"></script>
+  </body>
+</html>
