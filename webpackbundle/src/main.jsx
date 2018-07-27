@@ -1,5 +1,5 @@
-import NavBar from './js/navbar.jsx'
-import Container from '/Container.jsx'
+import NavBar from './navbar.jsx'
+import Container from './Container.jsx'
 
 const AUTH0_CLIENT_ID = "KF8oNwg3qrbhlT5pMeuJ5OL0IAiIt5PZ"
 const AUTH0_DOMAIN = "tses.auth0.com"
@@ -56,8 +56,8 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <NavBar login={this.loggedIn} />
-                <Container login={this.loggedIn} />
+                <NavBar />
+                <Container />
             </div>
         );
     }

@@ -115,7 +115,6 @@
 ## Webpack
 
 目前使用nodejs的webpack打包前端的js文件
-
-    npm install webpack
-    npm install webpack-cli
-    npm install babel-preset-react    
+    cd ./webpackbundle
+    npm install
+    webpack  
