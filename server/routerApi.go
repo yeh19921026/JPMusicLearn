@@ -29,6 +29,7 @@ func RouterApi(router *gin.Engine) error {
 		})
 	}
 	api.GET("/jokes", auth0.AuthMiddleware(), jokeHandler)
+	api.GET("/usersetting", auth0.AuthMiddleware(), userSettingHandler)
 	api.POST("/jokes/like/:jokeID", auth0.AuthMiddleware(), likeJoke)
 	return nil
 }
@@ -38,6 +39,14 @@ func jokeHandler(c *gin.Context) {
 	defer dbconn.Close()
 	result, _ := dbconn.FindAll()
 	fmt.Println("result = ", result)
+	c.JSON(http.StatusOK, result)
+}
+func userSettingHandler(c *gin.Context) {
+	c.Header("Content-Type", "application:json")
+	dbconn := dbmgo.NewConnect("profile")
+	defer dbconn.Close()
+	result, _ := dbconn.FindAll()
+	fmt.Println("userSettingHandler : ", c.Writer)
 	c.JSON(http.StatusOK, result)
 }
 func likeJoke(c *gin.Context) {

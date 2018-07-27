@@ -21,7 +21,7 @@ func NewConnect(collection string) DBConnection {
 func (dbc *DBConnection) FindbyNickName(nickname string) (interface{}, error) {
 
 	result := []bson.M{}
-	err := dbc.C.Find(bson.M{"NickName": nickname}).One(&result)
+	err := dbc.C.Find(bson.M{"nickname": nickname}).One(&result)
 	if err != nil {
 		log.Fatal(err)
 		return nil, err

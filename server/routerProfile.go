@@ -27,14 +27,14 @@ func init() {
 }
 
 type Profile struct {
-	Subject        string    `bson:"subject"`
-	RegisterTime   time.Time `bson:"registertime"`
-	FinishRegister bool      `bson:"finishregister"`
-	Name           string    `bson:"name"`
-	NickName       string    `bson:"nickname"`
-	Birthday       string    `bson:"birthday"`
-	Country        int       `bson:"country"`
-	JPProficiency  int       `bson:"jpproficiency"`
+	Subject       string    `bson:"subject" binding:"required"`
+	RegisterTime  time.Time `bson:"registertime" binding:"required"`
+	Varify        bool      `bson:"finishregister" binding:"required"`
+	Name          string    `bson:"name" binding:"required"`
+	NickName      string    `bson:"nickname"`
+	Birthday      string    `bson:"birthday"`
+	Country       int       `bson:"country"`
+	JPProficiency int       `bson:"jpproficiency"`
 }
 
 func RouterProfile(router *gin.Engine) error {

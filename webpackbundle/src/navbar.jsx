@@ -1,3 +1,8 @@
+const AUTH0_CLIENT_ID = "KF8oNwg3qrbhlT5pMeuJ5OL0IAiIt5PZ"
+const AUTH0_DOMAIN = "tses.auth0.com"
+const AUTH0_CALLBACK_URL = location.href;
+const AUTH0_API_AUDIENCE = "https://tses.auth0.com/api/v2/"
+
 class NavBar extends React.Component {
     setState() {
         let idToken = localStorage.getItem("id_token");
@@ -29,7 +34,7 @@ class NavBar extends React.Component {
     }
 }
 
-class NavBar extends React.Component {
+class NavBarLogin extends React.Component {
     constructor(props) {
         super(props);
         this.logout = this.logout.bind(this);
@@ -59,58 +64,27 @@ class NavBar extends React.Component {
 }
 
 class NavBarGuest extends React.Component {
-    parseHash() {
-        this.auth0 = new auth0.WebAuth({
+    constructor(props) {
+        super(props);
+        this.authenticate = this.authenticate.bind(this);
+    }
+    authenticate() {
+        this.WebAuth = new auth0.WebAuth({
             domain: AUTH0_DOMAIN,
-            clientID: AUTH0_CLIENT_ID
+            clientID: AUTH0_CLIENT_ID,
+            scope: "openid profile email",
+            audience: AUTH0_API_AUDIENCE,
+            responseType: "token id_token",
+            redirectUri: AUTH0_CALLBACK_URL
         });
-        this.auth0.parseHash(window.location.hash, (err, authResult) => {
-            if (err) {
-                return console.log(err);
-            }
-            if (
-                authResult !== null &&
-                authResult.accessToken !== null &&
-                authResult.idToken !== null
-            ) {
-                localStorage.setItem("access_token", authResult.accessToken);
-                localStorage.setItem("id_token", authResult.idToken);
-                localStorage.setItem("profile", JSON.stringify(authResult.idTokenPayload));
-                window.location = window.location.href.substr(0, window.location.href.indexOf("#"));
-            }
-        });
-    }
-    setup() {
-        $.ajaxSetup({
-            beforeSend: (r) => {
-                if (localStorage.getItem("access_token")) {
-                    r.setRequestHeader(
-                        "Authorization",
-                        "Bearer " + localStorage.getItem("access_token")
-                    );
-                }
-            }
-        });
-    }
-    setState() {
-        let idToken = localStorage.getItem("id_token");
-        if (idToken) {
-            this.loggedIn = true;
-        } else {
-            this.loggedIn = false;
-        }
-    }
-    componentWillMount() {
-        this.setup();
-        this.parseHash();
-        this.setState();
+        this.WebAuth.authorize();
     }
     render() {
         //vavbar container
         return (
             //menulogin.jade
             <ul id="navbar-menu" class="navbar-nav">
-                <li class="nav-item"></li><a href="#" class="nav-link">登入</a>
+                <li class="nav-item"></li><a href="#" onClick={this.authenticate} class="nav-link">登入</a>
                 <li class="nav-item"></li><a href="#" class="nav-link">歌曲列表</a>
             </ul>
         );

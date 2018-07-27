@@ -97,9 +97,9 @@ var _navbar = __webpack_require__(1);
 
 var _navbar2 = _interopRequireDefault(_navbar);
 
-var _Container = __webpack_require__(2);
+var _container = __webpack_require__(2);
 
-var _Container2 = _interopRequireDefault(_Container);
+var _container2 = _interopRequireDefault(_container);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -152,23 +152,16 @@ var App = function (_React$Component) {
                     }
                 }
             });
-        }
-    }, {
-        key: 'setState',
-        value: function setState() {
-            var idToken = localStorage.getItem("id_token");
-            if (idToken) {
-                this.loggedIn = true;
-            } else {
-                this.loggedIn = false;
-            }
+            if (localStorage.getItem("access_token")) {}
+            $.get("http://localhost:3000/api/usersetting", function (res) {
+                localStorage.setItem("user_setting", res);
+            });
         }
     }, {
         key: 'componentWillMount',
         value: function componentWillMount() {
             this.setup();
             this.parseHash();
-            this.setState();
         }
     }, {
         key: 'render',
@@ -176,240 +169,13 @@ var App = function (_React$Component) {
             return React.createElement(
                 'div',
                 null,
-                React.createElement(_navbar2.default, { login: this.loggedIn }),
-                React.createElement(_Container2.default, { login: this.loggedIn })
+                React.createElement(_navbar2.default, null),
+                React.createElement(_container2.default, null)
             );
         }
     }]);
 
     return App;
-}(React.Component);
-
-var Home = function (_React$Component2) {
-    _inherits(Home, _React$Component2);
-
-    function Home(props) {
-        _classCallCheck(this, Home);
-
-        var _this2 = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props));
-
-        _this2.authenticate = _this2.authenticate.bind(_this2);
-        return _this2;
-    }
-
-    _createClass(Home, [{
-        key: 'authenticate',
-        value: function authenticate() {
-            this.WebAuth = new auth0.WebAuth({
-                domain: AUTH0_DOMAIN,
-                clientID: AUTH0_CLIENT_ID,
-                scope: "openid profile email",
-                audience: AUTH0_API_AUDIENCE,
-                responseType: "token id_token",
-                redirectUri: AUTH0_CALLBACK_URL
-            });
-            this.WebAuth.authorize();
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            return React.createElement(
-                'div',
-                { className: 'container' },
-                React.createElement(
-                    'div',
-                    { className: 'col-xs-8 col-xs-offset-2 jumbotron text-center' },
-                    React.createElement(
-                        'h1',
-                        null,
-                        'Jokeish'
-                    ),
-                    React.createElement(
-                        'p',
-                        null,
-                        'A load of Dad jokes XD123'
-                    ),
-                    React.createElement(
-                        'p',
-                        null,
-                        'xxxxxxxxxxxxxxxxxxxxxxxxxxxxx '
-                    ),
-                    React.createElement(
-                        'a',
-                        { onClick: this.authenticate, className: 'btn btn-primary btn-lg btn-login btn-block' },
-                        'Sign In'
-                    )
-                )
-            );
-        }
-    }]);
-
-    return Home;
-}(React.Component);
-
-var LoggedIn = function (_React$Component3) {
-    _inherits(LoggedIn, _React$Component3);
-
-    function LoggedIn(props) {
-        _classCallCheck(this, LoggedIn);
-
-        var _this3 = _possibleConstructorReturn(this, (LoggedIn.__proto__ || Object.getPrototypeOf(LoggedIn)).call(this, props));
-
-        _this3.state = {
-            jokes: []
-        };
-        _this3.serverRequest = _this3.serverRequest.bind(_this3);
-        _this3.logout = _this3.logout.bind(_this3);
-        return _this3;
-    }
-
-    _createClass(LoggedIn, [{
-        key: 'logout',
-        value: function logout() {
-            localStorage.removeItem("id_token");
-            localStorage.removeItem("access_token");
-            localStorage.removeItem("profile");
-            location.reload();
-        }
-    }, {
-        key: 'serverRequest',
-        value: function serverRequest() {
-            var _this4 = this;
-
-            $.get("http://localhost:3000/api/jokes", function (res) {
-                console.log(res);
-                _this4.setState({
-                    jokes: res
-                });
-                console.log(_this4.state);
-            });
-        }
-    }, {
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            this.serverRequest();
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            return React.createElement(
-                'div',
-                { className: 'container' },
-                React.createElement('br', null),
-                React.createElement(
-                    'span',
-                    { className: 'pull-right' },
-                    React.createElement(
-                        'a',
-                        { onClick: this.logout },
-                        'Log out'
-                    )
-                ),
-                React.createElement(
-                    'h2',
-                    null,
-                    'Jokeish'
-                ),
-                React.createElement(
-                    'p',
-                    null,
-                    'Let\'s feed you with some funny Jokes!!!'
-                ),
-                React.createElement(
-                    'div',
-                    { className: 'row' },
-                    React.createElement(
-                        'div',
-                        { className: 'container' },
-                        this.state.jokes.map(function (joke, i) {
-                            return React.createElement(Joke, { key: i, joke: joke });
-                        })
-                    )
-                )
-            );
-        }
-    }]);
-
-    return LoggedIn;
-}(React.Component);
-
-var Joke = function (_React$Component4) {
-    _inherits(Joke, _React$Component4);
-
-    function Joke(props) {
-        _classCallCheck(this, Joke);
-
-        var _this5 = _possibleConstructorReturn(this, (Joke.__proto__ || Object.getPrototypeOf(Joke)).call(this, props));
-
-        _this5.state = {
-            liked: ""
-        };
-        _this5.like = _this5.like.bind(_this5);
-        _this5.serverRequest.bind(_this5);
-        return _this5;
-    }
-
-    _createClass(Joke, [{
-        key: 'like',
-        value: function like() {
-            var joke = this.props.joke;
-            this.serverRequest(joke);
-        }
-    }, {
-        key: 'serverRequest',
-        value: function serverRequest(joke) {
-            var _this6 = this;
-
-            $.post("http://localhost:3000/api/jokes/like/" + joke.id, { like: 1 }, function (res) {
-                console.log("res... ", res);
-                _this6.setState({ liked: "Liked!", jokes: res });
-                _this6.props.jokes = res;
-            });
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            console.log(this.props.joke);
-            return React.createElement(
-                'div',
-                { className: 'col-xs-4' },
-                React.createElement(
-                    'div',
-                    { className: 'panel panel-default' },
-                    React.createElement(
-                        'div',
-                        { className: 'panel-heading' },
-                        '#',
-                        this.props.joke.id,
-                        ' ',
-                        React.createElement(
-                            'span',
-                            { className: 'pull-right' },
-                            this.state.like
-                        )
-                    ),
-                    React.createElement(
-                        'div',
-                        { className: 'panel-body' },
-                        this.props.joke.data
-                    ),
-                    React.createElement(
-                        'div',
-                        { className: 'panel-footer' },
-                        this.props.joke.like,
-                        ' Likes \xA0',
-                        React.createElement(
-                            'a',
-                            { onClick: this.like, className: 'btn btn-default' },
-                            React.createElement('span', { className: 'glyphicon glyphicon-thumbs-up' })
-                        )
-                    )
-                )
-            );
-        }
-    }]);
-
-    return Joke;
 }(React.Component);
 
 ReactDOM.render(React.createElement(App, null), document.getElementById('app'));
@@ -432,6 +198,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AUTH0_CLIENT_ID = "KF8oNwg3qrbhlT5pMeuJ5OL0IAiIt5PZ";
+var AUTH0_DOMAIN = "tses.auth0.com";
+var AUTH0_CALLBACK_URL = location.href;
+var AUTH0_API_AUDIENCE = "https://tses.auth0.com/api/v2/";
 
 var NavBar = function (_React$Component) {
     _inherits(NavBar, _React$Component);
@@ -460,15 +231,198 @@ var NavBar = function (_React$Component) {
     }, {
         key: "render",
         value: function render() {
-            if (this.loggedIn) {
-                return React.createElement(LoggedIn, null);
-            } else {
-                return React.createElement(Home, null);
-            }
+            //vavbar container
+            return React.createElement(
+                "nav",
+                { id: "navGroup", "class": "navbar navbar-expand-lg navbar-dark fixed-top bg-dark nav-fill" },
+                React.createElement(
+                    "button",
+                    { "data-parent": "#navGroup", "data-target": "#navbarCollapse", "data-toggle": "collapse", type: "button", "aria-controls": "navbarCollapse", "aria-expanded": "false", "aria-label": "Toggle navigation", "class": "navbar-toggler" },
+                    React.createElement("span", { "class": "fa fa-bars" })
+                ),
+                React.createElement(
+                    "button",
+                    { "data-parent": "#navGroup", "data-target": "#searchbarCollapse", "data-toggle": "collapse", type: "button", "aria-controls": "navbarCollapse", "aria-expanded": "false", "aria-label": "Toggle navigation", "class": "navbar-toggler" },
+                    React.createElement("span", { "aria-hidden": "true", "class": "fa fa-search" })
+                ),
+                React.createElement(
+                    "div",
+                    { id: "navbarCollapse", "class": "collapse navbar-collapse text-center" },
+                    React.createElement(
+                        "a",
+                        { href: "home", "class": "navbar-brand ml-lg-0 ml-3" },
+                        "JPMusicLearn"
+                    ),
+                    this.loggedIn ? React.createElement(NavBarLogin, null) : React.createElement(NavBarGuest, null)
+                ),
+                React.createElement(
+                    "div",
+                    { id: "searchbarCollapse", "class": "collapse navbar-collapse" },
+                    React.createElement(
+                        "form",
+                        { "class": "nav-item input-group mt-2 mt-md-0" },
+                        React.createElement("input", { type: "text", "aria-label": "Search", placeholder: "\u641C\u5C0B", "class": "form-control mr-sm-2" }),
+                        React.createElement(
+                            "button",
+                            { type: "submit", "class": "btn btn-outline-success my-2 my-sm-0" },
+                            "\u641C\u5C0B"
+                        )
+                    )
+                )
+            );
         }
     }]);
 
     return NavBar;
+}(React.Component);
+
+var NavBarLogin = function (_React$Component2) {
+    _inherits(NavBarLogin, _React$Component2);
+
+    function NavBarLogin(props) {
+        _classCallCheck(this, NavBarLogin);
+
+        var _this2 = _possibleConstructorReturn(this, (NavBarLogin.__proto__ || Object.getPrototypeOf(NavBarLogin)).call(this, props));
+
+        _this2.logout = _this2.logout.bind(_this2);
+        return _this2;
+    }
+
+    _createClass(NavBarLogin, [{
+        key: "logout",
+        value: function logout() {
+            localStorage.removeItem("id_token");
+            localStorage.removeItem("access_token");
+            localStorage.removeItem("profile");
+            location.reload();
+        }
+    }, {
+        key: "render",
+        value: function render() {
+            return (
+                //menulogin.jade
+                React.createElement(
+                    "ul",
+                    { id: "navbar-menu", "class": "navbar-nav" },
+                    React.createElement("li", { "class": "nav-item" }),
+                    React.createElement(
+                        "a",
+                        { href: "profile", "class": "nav-link" },
+                        "\u500B\u4EBA\u6A94\u6848",
+                        React.createElement(
+                            "span",
+                            { "class": "badge badge-warning ml-1" },
+                            "!"
+                        )
+                    ),
+                    React.createElement("li", { "class": "nav-item" }),
+                    React.createElement(
+                        "a",
+                        { href: "playlist", "class": "nav-link" },
+                        "\u6B4C\u66F2\u5217\u8868"
+                    ),
+                    React.createElement("li", { "class": "nav-item" }),
+                    React.createElement(
+                        "a",
+                        { href: "#", "class": "nav-link" },
+                        "\u6211\u7684\u6700\u611B(\u7121)"
+                    ),
+                    React.createElement("li", { "class": "nav-item" }),
+                    React.createElement(
+                        "a",
+                        { href: "#", "class": "nav-link" },
+                        "\u64AD\u653E\u7D00\u9304(\u7121)"
+                    ),
+                    React.createElement("li", { "class": "nav-item" }),
+                    React.createElement(
+                        "a",
+                        { href: "playlist", "class": "nav-link" },
+                        "\u64AD\u653E\u6E05\u55AE"
+                    ),
+                    React.createElement("li", { "class": "nav-item" }),
+                    React.createElement(
+                        "a",
+                        { href: "addsong", "class": "nav-link" },
+                        "\u65B0\u589E\u6B4C\u66F2"
+                    ),
+                    React.createElement("li", { "class": "nav-item" }),
+                    React.createElement(
+                        "a",
+                        { href: "song", "class": "nav-link" },
+                        "\u6B4C\u66F2(\u66AB\u6642)"
+                    ),
+                    React.createElement("li", { "class": "nav-item" }),
+                    React.createElement(
+                        "a",
+                        { href: "searchresult", "class": "nav-link" },
+                        "\u641C\u5C0B\u7D50\u679C(\u66AB\u6642)"
+                    ),
+                    React.createElement("li", { "class": "nav-item" }),
+                    React.createElement(
+                        "a",
+                        { onClick: this.logout, "class": "nav-link" },
+                        "\u767B\u51FA"
+                    )
+                )
+            );
+        }
+    }]);
+
+    return NavBarLogin;
+}(React.Component);
+
+var NavBarGuest = function (_React$Component3) {
+    _inherits(NavBarGuest, _React$Component3);
+
+    function NavBarGuest(props) {
+        _classCallCheck(this, NavBarGuest);
+
+        var _this3 = _possibleConstructorReturn(this, (NavBarGuest.__proto__ || Object.getPrototypeOf(NavBarGuest)).call(this, props));
+
+        _this3.authenticate = _this3.authenticate.bind(_this3);
+        return _this3;
+    }
+
+    _createClass(NavBarGuest, [{
+        key: "authenticate",
+        value: function authenticate() {
+            this.WebAuth = new auth0.WebAuth({
+                domain: AUTH0_DOMAIN,
+                clientID: AUTH0_CLIENT_ID,
+                scope: "openid profile email",
+                audience: AUTH0_API_AUDIENCE,
+                responseType: "token id_token",
+                redirectUri: AUTH0_CALLBACK_URL
+            });
+            this.WebAuth.authorize();
+        }
+    }, {
+        key: "render",
+        value: function render() {
+            //vavbar container
+            return (
+                //menulogin.jade
+                React.createElement(
+                    "ul",
+                    { id: "navbar-menu", "class": "navbar-nav" },
+                    React.createElement("li", { "class": "nav-item" }),
+                    React.createElement(
+                        "a",
+                        { href: "#", onClick: this.authenticate, "class": "nav-link" },
+                        "\u767B\u5165"
+                    ),
+                    React.createElement("li", { "class": "nav-item" }),
+                    React.createElement(
+                        "a",
+                        { href: "#", "class": "nav-link" },
+                        "\u6B4C\u66F2\u5217\u8868"
+                    )
+                )
+            );
+        }
+    }]);
+
+    return NavBarGuest;
 }(React.Component);
 
 exports.default = NavBar;
@@ -486,6 +440,12 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _containerHome = __webpack_require__(3);
+
+var _containerHome2 = _interopRequireDefault(_containerHome);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -502,36 +462,117 @@ var Container = function (_React$Component) {
     }
 
     _createClass(Container, [{
-        key: "parseHash",
-        value: function parseHash() {
-            this.auth0 = new auth0.WebAuth({
-                domain: AUTH0_DOMAIN,
-                clientID: AUTH0_CLIENT_ID
-            });
-            this.auth0.parseHash(window.location.hash, function (err, authResult) {
-                if (err) {
-                    return console.log(err);
-                }
-                if (authResult !== null && authResult.accessToken !== null && authResult.idToken !== null) {
-                    localStorage.setItem("access_token", authResult.accessToken);
-                    localStorage.setItem("id_token", authResult.idToken);
-                    localStorage.setItem("profile", JSON.stringify(authResult.idTokenPayload));
-                    window.location = window.location.href.substr(0, window.location.href.indexOf("#"));
-                }
-            });
-        }
-    }, {
-        key: "setup",
-        value: function setup() {
+        key: 'render',
+
+        /*setup() {
             $.ajaxSetup({
-                beforeSend: function beforeSend(r) {
+                beforeSend: (r) => {
                     if (localStorage.getItem("access_token")) {
-                        r.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("access_token"));
+                        r.setRequestHeader(
+                            "Authorization",
+                            "Bearer " + localStorage.getItem("access_token")
+                        );
                     }
                 }
             });
         }
-    }, {
+        setState() {
+            let idToken = localStorage.getItem("id_token");
+            if (idToken) {
+                this.loggedIn = true;
+            } else {
+                this.loggedIn = false;
+            }
+        }
+        componentWillMount() {
+            this.setup();
+            this.parseHash();
+            this.setState();
+        }*/
+        value: function render() {
+            return React.createElement(_containerHome2.default, null);
+        }
+    }]);
+
+    return Container;
+}(React.Component);
+
+exports.default = Container;
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Home = function Home(props) {
+    return React.createElement(
+        "div",
+        { "class": "container mt-5 pt-2 pt-lg-3" },
+        React.createElement(UnvarifyAlert, null),
+        React.createElement(
+            "div",
+            { "class": "mb-5" },
+            React.createElement(
+                "div",
+                { "class": "h2" },
+                "\u7DB2\u7AD9\u4ECB\u7D39"
+            ),
+            React.createElement("hr", { id: "introduction" }),
+            React.createElement(
+                "p",
+                { "class": "px-2" },
+                "\u300A\u547D\u904B\u77F3\u4E4B\u9580\u300B\uFF08\u539F\u540D\uFF1ASteins;Gate[\u8A3B 1]\uFF09\u662F5pb.\u6240\u88FD\u4F5C\u7684\u4E00\u6B3E\u8996\u89BA\u5C0F\u8AAA\u904A\u6232\uFF0C\u65BC2009\u5E7410\u670815\u65E5\u767C\u884C\u3002\u9019\u90E8\u4F5C\u54C1\u662F\u7E7C\u300ACHAOS;HEAD\u300B\u4E4B\u5F8C\uFF0C5pb.\u8207Nitro+\u5408\u4F5C\u4F01\u5283\u7684\u300C\u5984\u60F3\u79D1\u5B78ADV\u7CFB\u5217\u300D\u5192\u96AA\u904A\u6232\uFF08ADV\uFF09\u7684\u7B2C\u4E8C\u4F5C\uFF1A\u5047\u60F3\u79D1\u5B78ADV\u3002\u300ASteins;Gate\u300B\u7684\u300CSteins\u300D\uFF08\u547D\u904B\u77F3\uFF09\u4E00\u8A5E\u53D6\u81EA\u7269\u7406\u5B78\u5BB6\u963F\u723E\u4F2F\u7279\xB7\u611B\u56E0\u65AF\u5766\uFF08Einstein\uFF0C\u30A2\u30A4\u30F3\u30B7\u30E5\u30BF\u30A4\u30F3\uFF09\uFF0C\u6545\u4E8B\u4E2D\u4E5F\u6D89\u53CA\u611B\u56E0\u65AF\u5766\u5275\u7ACB\u7684\u76F8\u5C0D\u8AD6\u7684\u7269\u7406\u5B78\u8981\u7D20\u3002[3]\u672C\u4F5C\u5728\u65E5\u672C\u767C\u552E\u96FB\u8166\u904A\u6232\u524D\u5C31\u5DF2\u7D93\u6709\u52D5\u756B\u5316\u7684\u6D88\u606F\u3002Windows\u7248\u672C\u65BC2010\u5E748\u670826\u65E5\u767C\u552E\u3002\u52D5\u756B\u65BC2011\u5E744\u67085\u65E5\u958B\u59CB\u9996\u64AD\uFF0C\u65BC\u9996\u64AD\u7B2C24\u8A71\uFF082011\u5E749\u670813\u65E5\uFF09\u5B8C\u7562\u5F8C\uFF0C\u516C\u5E03\u88FD\u4F5C\u300A\u5287\u5834\u7248 Steins;Gate\u300B\u7684\u6D88\u606F\u30022015\u5E743\u6708\u5BA3\u5E03\u88FD\u4F5C\u95DC\u65BC\u03B2\u4E16\u754C\u7DDA\u6545\u4E8B\u7684\u65B0\u4F5C\uFF0C\u540D\u70BA\u300ASteins;Gate 0\u300B\uFF0C\u4E14\u65BC\u540C\u671F\u5BA3\u5E03\u52D5\u756B\u5316[4]\u3002\u767C\u552E\u65E5\u671F\u70BA2015\u5E7412\u670810\u65E5\u3002\u540C\u5E747\u6708\uFF0C\u70BA\u914D\u5408\u904A\u6232\u300ASteins;Gate 0\u300B\uFF0C\u6771\u4EAC\u90FD\u6703\u96FB\u8996\u53F0\u91CD\u64AD\u300A\u547D\u904B\u77F3\u4E4B\u9580\u300B\u52D5\u756B\uFF0C\u4F46\u7B2C23\u8A71\u7684\u5167\u5BB9\u537B\u8207\u539F\u7248\u6709\u76F8\u7576\u5927\u7684\u5206\u6B67\uFF0C\u540C\u6642\u539F\u672C\u9810\u8A08\u64AD\u653E\u7B2C24\u8A71\u7684\u6642\u6BB5\u5C07\u6703\u6539\u64AD\u7279\u5225\u7BC0\u76EE\uFF0C\u5167\u5BB9\u662F\u300A\u547D\u904B\u77F3\u4E4B\u95800\u300B\u7684\u5BA3\u50B3\u4EE5\u53CA\u6539\u7DE8\u724823\u96C6\u7684\u5E55\u5F8C\u82B1\u7D6E[5][6]\u3002"
+            )
+        ),
+        React.createElement(
+            "div",
+            { "class": "mb-5" },
+            React.createElement(
+                "h2",
+                null,
+                "\u6700\u65B0\u6B4C\u66F2"
+            ),
+            React.createElement("hr", null),
+            React.createElement("ul", { id: "newsong", "class": "px-2" })
+        ),
+        React.createElement(
+            "div",
+            { "class": "mb-5" },
+            React.createElement(
+                "h2",
+                null,
+                "\u71B1\u9580\u6B4C\u66F2"
+            ),
+            React.createElement("hr", null),
+            React.createElement("ul", { id: "hotsong", "class": "px-2" })
+        )
+    );
+};
+
+var UnvarifyAlert = function (_React$Component) {
+    _inherits(UnvarifyAlert, _React$Component);
+
+    function UnvarifyAlert() {
+        _classCallCheck(this, UnvarifyAlert);
+
+        return _possibleConstructorReturn(this, (UnvarifyAlert.__proto__ || Object.getPrototypeOf(UnvarifyAlert)).apply(this, arguments));
+    }
+
+    _createClass(UnvarifyAlert, [{
         key: "setState",
         value: function setState() {
             var idToken = localStorage.getItem("id_token");
@@ -544,25 +585,23 @@ var Container = function (_React$Component) {
     }, {
         key: "componentWillMount",
         value: function componentWillMount() {
-            this.setup();
-            this.parseHash();
             this.setState();
         }
     }, {
         key: "render",
         value: function render() {
-            if (this.loggedIn) {
-                return React.createElement(LoggedIn, null);
-            } else {
-                return React.createElement(Home, null);
-            }
+            return React.createElement(
+                "div",
+                { role: "alert", "class": "alert alert-primary" },
+                "\u586B\u5BEB\u500B\u4EBA\u8CC7\u6599\u53EF\u4EE5\u7372\u5F97\u66F4\u591A\u6703\u54E1\u529F\u80FD!"
+            );
         }
     }]);
 
-    return Container;
+    return UnvarifyAlert;
 }(React.Component);
 
-exports.default = Container;
+exports.default = Home;
 
 /***/ })
 /******/ ]);
