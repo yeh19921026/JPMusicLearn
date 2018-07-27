@@ -1,43 +1,40 @@
-div.container.mt-5.pt-2.pt-lg-3
-	
-	+img('1920','1080')
-	div
-		//-type 1
-		.text-center.mt-4(style="font-size:3.2vw")
-			|スカイクラッドの
-			+rby('観測者','かんそくしゃ')
-		.text-center.mb-4(style="font-size:3.2vw")
-			|與天同行的觀測者
-		ul#myTab.nav.nav-tabs.mb-3(role='tablist')
-			li.nav-item
-				a#lyrics-tab.nav-link.active(data-toggle='tab', href='#lyrics', role='tab', aria-controls='lyrics', aria-selected='true') 歌詞
-			li.nav-item
-				a#info-tab.nav-link(data-toggle='tab', href='#info', role='tab', aria-controls='info', aria-selected='false') 介紹
-			li.nav-item
-				a#comment-tab.nav-link(data-toggle='tab', href='#comment', role='tab', aria-controls='comment', aria-selected='false') 評論
-			li.nav-item
-				a#other-tab.nav-link(data-toggle='tab', href='#other', role='tab', aria-controls='other', aria-selected='false') 其他功能
-		#songTabContent.tab-content.mb-5
-			#lyrics.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='lyrics-tab') 
-				include lyrics.jade
-			#info.tab-pane.fade(role='tabpanel', aria-labelledby='info-tab') 
-				include songinfo.jade
-			#comment.tab-pane.fade(role='tabpanel', aria-labelledby='comment-tab') 
-				include comment.jade
-			#other.tab-pane.fade(role='tabpanel', aria-labelledby='other-tab') 
-				include other.jade
-	//-div
-		//-type 2
-		include other.jade
-		include songinfo.jade
-		.text-center.mt-4(style="font-size:3.2vw")
-			|スカイクラッドの
-			+rby('観測者','かんそくしゃ')
-		.text-center.mb-4(style="font-size:3.2vw")
-			|與天同行的觀測者
-
-		include lyrics.jade
-		include comment.jade
-	ul.list-group.my-5
-		a.list-group-item 目前檢視最新版本
-		a.list-group-item.list-group-item-primary(href="#") 檢視2018年1月1日00:00版本
++img('1920','1080')
+div
+	//-type 1
+	.text-center.mt-4(style="font-size:3.2vw")
+		|スカイクラッドの
+		+rby('観測者','かんそくしゃ')
+	.text-center.mb-4(style="font-size:3.2vw")
+		|與天同行的觀測者
+	ul#myTab.nav.nav-tabs.mb-3(role='tablist')
+		li.nav-item
+			a#lyrics-tab.nav-link.active(data-toggle='tab', href='#lyrics', role='tab', aria-controls='lyrics', aria-selected='true') 歌詞
+		li.nav-item
+			a#info-tab.nav-link(data-toggle='tab', href='#info', role='tab', aria-controls='info', aria-selected='false') 介紹
+		li.nav-item
+			a#comment-tab.nav-link(data-toggle='tab', href='#comment', role='tab', aria-controls='comment', aria-selected='false') 評論
+		li.nav-item
+			a#other-tab.nav-link(data-toggle='tab', href='#other', role='tab', aria-controls='other', aria-selected='false') 其他功能
+	#songTabContent.tab-content.mb-5
+		#lyrics.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='lyrics-tab') 
+			include lyrics.jade
+		#info.tab-pane.fade(role='tabpanel', aria-labelledby='info-tab') 
+			include songinfo.jade
+		#comment.tab-pane.fade(role='tabpanel', aria-labelledby='comment-tab') 
+			include comment.jade
+		#other.tab-pane.fade(role='tabpanel', aria-labelledby='other-tab') 
+			include other.jade
+//-div
+	//-type 2
+	include other.jade
+	include songinfo.jade
+	.text-center.mt-4(style="font-size:3.2vw")
+		|スカイクラッドの
+		+rby('観測者','かんそくしゃ')
+	.text-center.mb-4(style="font-size:3.2vw")
+		|與天同行的觀測者
+	include lyrics.jade
+	include comment.jade
+ul.list-group.my-5
+	a.list-group-item 目前檢視最新版本
+	a.list-group-item.list-group-item-primary(href="#") 檢視2018年1月1日00:00版本

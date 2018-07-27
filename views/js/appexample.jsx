@@ -1,6 +1,3 @@
-import NavBar from './js/navbar.jsx'
-import Container from '/Container.jsx'
-
 const AUTH0_CLIENT_ID = "KF8oNwg3qrbhlT5pMeuJ5OL0IAiIt5PZ"
 const AUTH0_DOMAIN = "tses.auth0.com"
 const AUTH0_CALLBACK_URL = location.href;
@@ -54,12 +51,13 @@ class App extends React.Component {
         this.setState();
     }
     render() {
-        return (
-            <div id='app'>
-                <NavBar login={this.loggedIn} />
-                <Container login={this.loggedIn} />
-            </div>
-        );
+        if (this.loggedIn) {
+            console.log("return (<LoggedIn />);")
+            return (<LoggedIn />);
+        } else {
+            console.log("return (<Home />);")
+            return (<Home />);
+        }
     }
 }
 class Home extends React.Component {

@@ -6,7 +6,7 @@ import (
 	"github.com/urfave/cli"
 )
 
-func Init() error {
+func CommandInit() error {
 	app := cli.NewApp()
 	//cli name
 	app.Name = "JPMLServer"
@@ -18,6 +18,5 @@ func Init() error {
 	app.Commands = []cli.Command{
 		ServerCommand,
 	}
-
 	return app.Run(os.Args)
 }

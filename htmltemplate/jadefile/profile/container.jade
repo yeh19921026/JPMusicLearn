@@ -1,51 +1,50 @@
-div.container.mt-5.pt-2.pt-lg-3
-	.row
-		.col-12.col-md-2
-			img#userphoto.mr-3.img-responsive.center-block(data-src='holder.js/100x100?theme=thumb&bg=55595c&fg=eceeef&text=userphoto', alt='使用者頭貼')
-		.col-12.col-md-10
-			form#editProfile
-				.form-group.row
-					label.col-md-2.col-form-label(for='name') 名稱
-					.col-md-10
-						input#name.form-control-plaintext(type='text', readonly='', value='UserName')
-				.form-group.row
-					label.col-md-2.col-form-label(for='email') 信箱
-					.col-md-10
-						input#email.form-control-plaintext(type='text', readonly='', value='email@example.com')
-				.form-group.row
-					label.col-md-2.col-form-label(for='nickName') 暱稱
-					.col-md-10
-						if isvarified
-							input#nickName.form-control(name='nickname', type='text', readonly='', placeholder='我的暱稱')
-						else
-							input#nickName.form-control(name='nickname', type='text', placeholder='暱稱')
-				.form-group.row
-					label.col-md-2.col-form-label(for='birthday') 生日
-					.col-md-10
-						if isvarified
-							input#birthday.form-control(name='bday', type='date', min='1900-01-01', max='2018-01-01',readonly='',value="1990-01-01")
-						else
-							input#birthday.form-control(name='bday', type='date', min='1900-01-01', max='2018-01-01')
-				.form-group.row
-					label.col-md-2.col-form-label(for='gender') 生理性別
-					.col-md-10.row.ml-1
-						.form-check.col-4.col-md-2
-							input#male.form-check-input(name='gender', type='radio', value='male', checked='')
-							label.form-check-label(for='male') 男性  
-						.form-check.col-4.col-md-2
-							input#female.form-check-input(name='gender', type='radio', value='female')
-							label.form-check-label(for='female') 女性  
-						.form-check.col-4.col-md-2
-							input#other.form-check-input(name='gender', type='radio', value='other')
-							label.form-check-label(for='other') 其他  
-				.form-group.row
-					label.col-md-2.col-form-label(for='JLPTLevel') 日檢等級
-					.col-md-10
-						select#JLPTLevel.form-control(name='jlptlevel')
-							option(selected,value='unselect') 選擇日檢等級
-							option(value='N5') N5
-							option(value='N4') N4
-							option(value='N3') N3
-							option(value='N2') N2
-							option(value='N1') N1
-				button.btn.btn-primary(type='submit') 更新個人檔案
+.row
+	.col-12.col-md-2
+		img#userphoto.mr-3.img-responsive.center-block(data-src='holder.js/100x100?theme=thumb&bg=55595c&fg=eceeef&text=userphoto', alt='使用者頭貼')
+	.col-12.col-md-10
+		form#editProfile
+			.form-group.row
+				label.col-md-2.col-form-label(for='name') 名稱
+				.col-md-10
+					input#name.form-control-plaintext(type='text', readonly='', value='UserName')
+			.form-group.row
+				label.col-md-2.col-form-label(for='email') 信箱
+				.col-md-10
+					input#email.form-control-plaintext(type='text', readonly='', value='email@example.com')
+			.form-group.row
+				label.col-md-2.col-form-label(for='nickName') 暱稱
+				.col-md-10
+					if isvarified
+						input#nickName.form-control(name='nickname', type='text', readonly='', placeholder='我的暱稱')
+					else
+						input#nickName.form-control(name='nickname', type='text', placeholder='暱稱')
+			.form-group.row
+				label.col-md-2.col-form-label(for='birthday') 生日
+				.col-md-10
+					if isvarified
+						input#birthday.form-control(name='bday', type='date', min='1900-01-01', max='2018-01-01',readonly='',value="1990-01-01")
+					else
+						input#birthday.form-control(name='bday', type='date', min='1900-01-01', max='2018-01-01')
+			.form-group.row
+				label.col-md-2.col-form-label(for='gender') 生理性別
+				.col-md-10.row.ml-1
+					.form-check.col-4.col-md-2
+						input#male.form-check-input(name='gender', type='radio', value='male', checked='')
+						label.form-check-label(for='male') 男性  
+					.form-check.col-4.col-md-2
+						input#female.form-check-input(name='gender', type='radio', value='female')
+						label.form-check-label(for='female') 女性  
+					.form-check.col-4.col-md-2
+						input#other.form-check-input(name='gender', type='radio', value='other')
+						label.form-check-label(for='other') 其他  
+			.form-group.row
+				label.col-md-2.col-form-label(for='JLPTLevel') 日檢等級
+				.col-md-10
+					select#JLPTLevel.form-control(name='jlptlevel')
+						option(selected,value='unselect') 選擇日檢等級
+						option(value='N5') N5
+						option(value='N4') N4
+						option(value='N3') N3
+						option(value='N2') N2
+						option(value='N1') N1
+			button.btn.btn-primary(type='submit') 更新個人檔案

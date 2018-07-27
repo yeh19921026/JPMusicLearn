@@ -15,131 +15,129 @@ mixin textareaform(id,title,ph)
 		label.col-md-2.col-form-label(for= id)= title
 		.col-md-10
 			textarea.form-control(id= id,aria-label='leave comment',name= id, type='text', placeholder= ph)
-div.container.mt-5.pt-2.pt-lg-3
-	h2.mb-3 新增歌曲
-	form#editProfile
-		.form-group.row
-			label.col-md-2.col-form-label(for='twName') 中文名稱
-			.col-md-10
-				if editsong
-					input#twName.form-control(name='twName', type='text', readonly='', placeholder='與天同行的觀測者')
-				else
-					input#twName.form-control(name='twName', type='text', , placeholder='請確認歌曲名稱是否正確，完成後無法修改')
-		+textform('jpName','日文名稱','e.g. あああああああ')
-		+textform('tag','標籤','使用小寫逗號  , 分隔')
-		+textform('uri','Youtube網址','貼上原網址或短網址')
-		+textform('songediter','作曲者','作曲者')
-		+textform('lyricsediter','作詞者','作詞者')
-		+textform('singer','演唱者','演唱者')
-		+textareaform('info','歌曲介紹','歌曲介紹')
-		.form-group.row
-			label.col-12.col-form-label(for='lyrics') 歌詞
-				span.badge.badge-warning.m-1(data-toggle='collapse', href='#lyricsRule', role='button', aria-expanded='false', aria-controls='lyricsRule') 點我打開歌詞輸入規則
-			#lyricsRule.collapse.col-12.mb-3
-				.card.card-body
-					h4 歌詞解析
-					p 歌詞會自動以一行日文一行中文做解析。<br>
-						|如果是日文、中文、英文的歌詞可以在第一行加註。
-						font(color="red") [jte]
-						|，全文會自動以日文、中文、英文歌詞做解析。<br>
-						|如果是多行日文或多行中文可以在行首加註
-						font(color="red") [j] [t] [e]
-						|。<br>
-					h4 歌詞上標
-					p 上標日文歌詞可以用兩種方法 
-						font(color="red") 1.漢字(假名) 2.[漢字,假名]
-						|。<br>
-						|如果是非漢字，如中文、英文要上標請使用。
-						font(color="red") [文字,上標文字]
-						|，e.g. 
-						font(color="red") [end,エンド]
-					h4 空行
-					p 歌曲間隔可以在行首使用
-						font(color="red") [hr]
-						|做一個空行。<br>
-						|可以在編輯歌詞的時候做無內容的空行方便檢視。
-					h4 重複歌詞
-					p 歌詞重複可以做
-						font(color="red") [rps,1]
-						|做重複的部分開頭，
-						font(color="red") [rpe]
-						|做重複的部分結尾，
-						font(color="red") [rp,1]
-						|重複第一段歌詞。<br>
-						|重複歌詞不支援巢狀結構。<br>
-						//-|重複歌詞標記限定行首。
-					.row
-						a.btn.btn-primary.m-1(data-toggle='collapse', href='#lyricsexample', role='button', aria-expanded='false', aria-controls='lyricsRule') 範例
-						a.btn.btn-primary.m-1(data-toggle='collapse', href='#lyricsRule', role='button', aria-expanded='false', aria-controls='lyricsRule') 收起
-					#lyricsexample.collapse.col-12.mb-3
-						h4.mt-2 範例
-						p [jte] <br>
-							|日文[歌詞,上標]1<br>
-							|中文歌詞1<br>
-							|Verse 1<br>
-							|日文[歌詞,上標]2<br>
-							|中文歌詞2<br>
-							|Verse 2<br>
-							|オラオラオラオラ<br>
-							|[rps,1][j]日文[副歌,上標]1<br>
-							|中文副歌1<br>
-							|Chorus 1<br>
-							|日文[副歌,上標]2<br>
-							|中文副歌2<br>
-							|Chorus 2<br>
-							|[rpe]<br>
-							|[rp,1]<br>
-						h4.mt-2 輸出
+h2.mb-3 新增歌曲
+form#editProfile
+	.form-group.row
+		label.col-md-2.col-form-label(for='twName') 中文名稱
+		.col-md-10
+			if editsong
+				input#twName.form-control(name='twName', type='text', readonly='', placeholder='與天同行的觀測者')
+			else
+				input#twName.form-control(name='twName', type='text', , placeholder='請確認歌曲名稱是否正確，完成後無法修改')
+	+textform('jpName','日文名稱','e.g. あああああああ')
+	+textform('tag','標籤','使用小寫逗號  , 分隔')
+	+textform('uri','Youtube網址','貼上原網址或短網址')
+	+textform('songediter','作曲者','作曲者')
+	+textform('lyricsediter','作詞者','作詞者')
+	+textform('singer','演唱者','演唱者')
+	+textareaform('info','歌曲介紹','歌曲介紹')
+	.form-group.row
+		label.col-12.col-form-label(for='lyrics') 歌詞
+			span.badge.badge-warning.m-1(data-toggle='collapse', href='#lyricsRule', role='button', aria-expanded='false', aria-controls='lyricsRule') 點我打開歌詞輸入規則
+		#lyricsRule.collapse.col-12.mb-3
+			.card.card-body
+				h4 歌詞解析
+				p 歌詞會自動以一行日文一行中文做解析。<br>
+					|如果是日文、中文、英文的歌詞可以在第一行加註。
+					font(color="red") [jte]
+					|，全文會自動以日文、中文、英文歌詞做解析。<br>
+					|如果是多行日文或多行中文可以在行首加註
+					font(color="red") [j] [t] [e]
+					|。<br>
+				h4 歌詞上標
+				p 上標日文歌詞可以用兩種方法 
+					font(color="red") 1.漢字(假名) 2.[漢字,假名]
+					|。<br>
+					|如果是非漢字，如中文、英文要上標請使用。
+					font(color="red") [文字,上標文字]
+					|，e.g. 
+					font(color="red") [end,エンド]
+				h4 空行
+				p 歌曲間隔可以在行首使用
+					font(color="red") [hr]
+					|做一個空行。<br>
+					|可以在編輯歌詞的時候做無內容的空行方便檢視。
+				h4 重複歌詞
+				p 歌詞重複可以做
+					font(color="red") [rps,1]
+					|做重複的部分開頭，
+					font(color="red") [rpe]
+					|做重複的部分結尾，
+					font(color="red") [rp,1]
+					|重複第一段歌詞。<br>
+					|重複歌詞不支援巢狀結構。<br>
+					//-|重複歌詞標記限定行首。
+				.row
+					a.btn.btn-primary.m-1(data-toggle='collapse', href='#lyricsexample', role='button', aria-expanded='false', aria-controls='lyricsRule') 範例
+					a.btn.btn-primary.m-1(data-toggle='collapse', href='#lyricsRule', role='button', aria-expanded='false', aria-controls='lyricsRule') 收起
+				#lyricsexample.collapse.col-12.mb-3
+					h4.mt-2 範例
+					p [jte] <br>
+						|日文[歌詞,上標]1<br>
+						|中文歌詞1<br>
+						|Verse 1<br>
+						|日文[歌詞,上標]2<br>
+						|中文歌詞2<br>
+						|Verse 2<br>
+						|オラオラオラオラ<br>
+						|[rps,1][j]日文[副歌,上標]1<br>
+						|中文副歌1<br>
+						|Chorus 1<br>
+						|日文[副歌,上標]2<br>
+						|中文副歌2<br>
+						|Chorus 2<br>
+						|[rpe]<br>
+						|[rp,1]<br>
+					h4.mt-2 輸出
+					hr
+					ul.list-unstyled(style="font-size:2.5vw")
+						li.text-center.my-1 
+							|日文
+							+rby('歌詞','上標')
+							|1
+						li.text-center.my-1 中文歌詞1
+						li.text-center.my-1 Verse 1
 						hr
-						ul.list-unstyled(style="font-size:2.5vw")
-							li.text-center.my-1 
-								|日文
-								+rby('歌詞','上標')
-								|1
-							li.text-center.my-1 中文歌詞1
-							li.text-center.my-1 Verse 1
-							hr
-							li.text-center.my-1 
-								|日文
-								+rby('歌詞','上標')
-								|2
-							li.text-center.my-1 中文歌詞2
-							li.text-center.my-1 Verse 2
-							hr
-							li.text-center.my-1 オラオラオラオラ
-							hr
-							li.text-center.my-1 
-								|日文
-								+rby('副歌','上標')
-								|1
-							li.text-center.my-1 中文副歌1
-							li.text-center.my-1 Chorus 1
-							hr
-							li.text-center.my-1 
-								|日文
-								+rby('副歌','上標')
-								|2
-							li.text-center.my-1 中文副歌2
-							li.text-center.my-1 Chorus 2
-							hr
-							li.text-center.my-1 
-								|日文
-								+rby('副歌','上標')
-								|1
-							li.text-center.my-1 中文副歌1
-							li.text-center.my-1 Chorus 1
-							hr
-							li.text-center.my-1 
-								|日文
-								+rby('副歌','上標')
-								|2
-							li.text-center.my-1 中文副歌2
-							li.text-center.my-1 Chorus 2
-							hr
-			.col-12
-				textarea.form-control(id='lyrics',aria-label='leave comment',name='lyrics', type='text', placeholder='歌詞')
-		button.btn.btn-primary(type='submit') 預覽
-	ul.list-group.my-5
-		a.list-group-item 目前檢視最新版本
-		a.list-group-item.list-group-item-primary(href="#") 檢視2018年1月1日00:00版本
-
+						li.text-center.my-1 
+							|日文
+							+rby('歌詞','上標')
+							|2
+						li.text-center.my-1 中文歌詞2
+						li.text-center.my-1 Verse 2
+						hr
+						li.text-center.my-1 オラオラオラオラ
+						hr
+						li.text-center.my-1 
+							|日文
+							+rby('副歌','上標')
+							|1
+						li.text-center.my-1 中文副歌1
+						li.text-center.my-1 Chorus 1
+						hr
+						li.text-center.my-1 
+							|日文
+							+rby('副歌','上標')
+							|2
+						li.text-center.my-1 中文副歌2
+						li.text-center.my-1 Chorus 2
+						hr
+						li.text-center.my-1 
+							|日文
+							+rby('副歌','上標')
+							|1
+						li.text-center.my-1 中文副歌1
+						li.text-center.my-1 Chorus 1
+						hr
+						li.text-center.my-1 
+							|日文
+							+rby('副歌','上標')
+							|2
+						li.text-center.my-1 中文副歌2
+						li.text-center.my-1 Chorus 2
+						hr
+		.col-12
+			textarea.form-control(id='lyrics',aria-label='leave comment',name='lyrics', type='text', placeholder='歌詞')
+	button.btn.btn-primary(type='submit') 預覽
+ul.list-group.my-5
+	a.list-group-item 目前檢視最新版本
+	a.list-group-item.list-group-item-primary(href="#") 檢視2018年1月1日00:00版本
