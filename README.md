@@ -111,3 +111,11 @@
 更多資訊請查看http://jade-lang.com
 
 未來可能會更換為pug
+
+## Webpack
+
+目前使用nodejs的webpack打包前端的js文件
+
+    npm install webpack
+    npm install webpack-cli
+    npm install babel-preset-react    
