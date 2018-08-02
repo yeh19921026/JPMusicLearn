@@ -1,3 +1,11 @@
+mixin nava(hrf,txt)
+  li.nav-item
+    a.nav-link(href=hrf)=txt
+      block
+mixin navlink(hrf,txt)
+  li.nav-item
+    Link.nav-link(to=hrf)=txt
+      block
 //-li(class="nav-item")
   a(class='nav-link',href='#') 個人檔案
     span(class='badge badge-warning') !
@@ -9,20 +17,15 @@
   a(class='nav-link',href='#') 播放紀錄
 //-li(class="nav-item")
   a(class='nav-link',href='#') 播放清單
-mixin navitem(hrf,txt)
-  li.nav-item
-  a.nav-link(href=hrf)= txt
-    block
-
-+navitem('profile', '個人檔案')
++navlink('/profile', '個人檔案')
   if isvarified
   else
     span.badge.badge-warning.ml-1 !
-+navitem('playlist', '歌曲列表')
-+navitem('#', '我的最愛(無)')
-+navitem('#', '播放紀錄(無)')
-+navitem('playlist', '播放清單')
-+navitem('addsong', '新增歌曲')
-+navitem('song', '歌曲(暫時)')
-+navitem('searchresult', '搜尋結果(暫時)')
-+navitem('#', '登出')
++navlink('/searchresult', '歌曲列表')
++navlink('/myfavorite', '我的最愛(無)')
++navlink('/history', '播放紀錄(無)')
++navlink('/playlist', '播放清單')
++navlink('/addsong', '新增歌曲')
++navlink('/song', '歌曲(暫時)')
++navlink('/searchresult', '搜尋結果(暫時)')
++nava('#', '登出')

@@ -42,6 +42,7 @@ func RouterProfile(router *gin.Engine) error {
 	return nil
 }
 func ProfileHandler(c *gin.Context) {
+	fmt.Println(c.Request)
 	c.Header("Content-Type", "application:json")
 	dbconn := dbmgo.NewConnect("Profile")
 	defer dbconn.Close()

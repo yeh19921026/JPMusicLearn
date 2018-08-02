@@ -2,6 +2,12 @@
 
 
 [[projects]]
+  name = "github.com/Joker/jade"
+  packages = ["."]
+  revision = "35b3f5bdbcc920cd31f4870536dbc63be8530541"
+  version = "v0.7.0"
+
+[[projects]]
   name = "github.com/astaxie/beego"
   packages = ["logs"]
   revision = "bf5c5626ab429e66d88602e1ab1ab5fbf4629a01"
@@ -54,6 +60,12 @@
   version = "v0.0.3"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/pirsquare/country-mapper"
+  packages = ["."]
+  revision = "0fffc2d62977fbd5f4042f2578616412afa5ca4c"
+
+[[projects]]
   name = "github.com/ugorji/go"
   packages = ["codec"]
   revision = "b4c50a2b199d93b13dc15e78929cfb23bfdf21ab"
@@ -98,6 +110,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "fcf843e2a45cdecbd5e464b0d4977bce17d513d450492909fcab5ec93163e31e"
+  inputs-digest = "0369032ea12ff7eaf138ff0d6896a2191533326bc12fc2e5fad6dd8f5fa99071"
   solver-name = "gps-cdcl"
   solver-version = 1

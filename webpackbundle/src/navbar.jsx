@@ -1,6 +1,11 @@
+import {
+	BrowserRouter as Router,
+	Route,
+	Link
+} from 'react-router-dom';
 const AUTH0_CLIENT_ID = "KF8oNwg3qrbhlT5pMeuJ5OL0IAiIt5PZ"
 const AUTH0_DOMAIN = "tses.auth0.com"
-const AUTH0_CALLBACK_URL = location.href;
+const AUTH0_CALLBACK_URL = "http://localhost:3000/";//location.href;
 const AUTH0_API_AUDIENCE = "https://tses.auth0.com/api/v2/"
 
 class NavBar extends React.Component {
@@ -49,15 +54,31 @@ class NavBarLogin extends React.Component {
         return (
             //menulogin.jade
             <ul id="navbar-menu" class="navbar-nav">
-                <li class="nav-item"></li><a href="profile" class="nav-link">個人檔案<span class="badge badge-warning ml-1">!</span></a>
-                <li class="nav-item"></li><a href="playlist" class="nav-link">歌曲列表</a>
-                <li class="nav-item"></li><a href="#" class="nav-link">我的最愛(無)</a>
-                <li class="nav-item"></li><a href="#" class="nav-link">播放紀錄(無)</a>
-                <li class="nav-item"></li><a href="playlist" class="nav-link">播放清單</a>
-                <li class="nav-item"></li><a href="addsong" class="nav-link">新增歌曲</a>
-                <li class="nav-item"></li><a href="song" class="nav-link">歌曲(暫時)</a>
-                <li class="nav-item"></li><a href="searchresult" class="nav-link">搜尋結果(暫時)</a>
-                <li class="nav-item"></li><a onClick={this.logout} class="nav-link">登出</a>
+                <li class="nav-item">
+                    <Link to="/profile" class="nav-link">個人檔案<span class="badge badge-warning ml-1">!</span></Link>
+                </li>
+                <li class="nav-item">
+                    <Link to="/searchresult" class="nav-link">歌曲列表</Link>
+                </li>
+                <li class="nav-item">
+                    <Link to="/myfavorite" class="nav-link">我的最愛(無)</Link>
+                </li>
+                <li class="nav-item">
+                    <Link to="/history" class="nav-link">播放紀錄(無)</Link>
+                </li>
+                <li class="nav-item">
+                    <Link to="/playlist" class="nav-link">播放清單</Link>
+                </li>
+                <li class="nav-item">
+                    <Link to="/addsong" class="nav-link">新增歌曲</Link>
+                </li>
+                <li class="nav-item">
+                    <Link to="/song" class="nav-link">歌曲(暫時)</Link>
+                </li>
+                <li class="nav-item">
+                    <Link to="/searchresult" class="nav-link">搜尋結果(暫時)</Link>
+                </li>
+                <li class="nav-item"><a href="#" onClick={this.logout} class="nav-link">登出</a></li>
             </ul>
         );
     }
@@ -77,6 +98,7 @@ class NavBarGuest extends React.Component {
             responseType: "token id_token",
             redirectUri: AUTH0_CALLBACK_URL
         });
+        localStorage.setItem("authredirectUri",location.href);
         this.WebAuth.authorize();
     }
     render() {
@@ -84,8 +106,10 @@ class NavBarGuest extends React.Component {
         return (
             //menulogin.jade
             <ul id="navbar-menu" class="navbar-nav">
-                <li class="nav-item"></li><a href="#" onClick={this.authenticate} class="nav-link">登入</a>
-                <li class="nav-item"></li><a href="#" class="nav-link">歌曲列表</a>
+                <li class="nav-item"><a href="#" class="nav-link" onClick={this.authenticate}>登入</a></li>
+                <li class="nav-item">
+                    <Link to="/searchresult" class="nav-link">歌曲列表</Link>
+                </li>
             </ul>
         );
     }

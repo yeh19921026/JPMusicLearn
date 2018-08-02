@@ -13,15 +13,6 @@ type testtype struct {
 	Name         string        `bson:"name"`
 	Nickname     string        `bson:"nickname"`
 }
-type Prfile struct {
-	Subject       string    `bson:"subject"`
-	RegisterTime  time.Time `bson:"registertime"`
-	Varify        bool      `bson:"varify"`
-	Name          string    `bson:"name"`
-	NickName      string    `bson:"nickname"`
-	Birthday      string    `bson:"birthday"`
-	JPProficiency int       `bson:"jpproficiency"`
-}
 
 func TestType() {
 	dbc := NewConnect("testtype")

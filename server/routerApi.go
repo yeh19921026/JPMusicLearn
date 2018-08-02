@@ -46,8 +46,14 @@ func userSettingHandler(c *gin.Context) {
 	dbconn := dbmgo.NewConnect("profile")
 	defer dbconn.Close()
 	result, _ := dbconn.FindAll()
-	fmt.Println("userSettingHandler : ", c.Writer)
+	/*user := c.Request.Context().Value("user")
+	for k, v := range user.(*jwt.Token).Claims.(jwt.MapClaims) {
+		fmt.Println("123132 : ", k, v)
+	}
+	fmt.Println("1", user.(*jwt.Token).Claims.(jwt.MapClaims)["sub"])
+	*/
 	c.JSON(http.StatusOK, result)
+
 }
 func likeJoke(c *gin.Context) {
 	if jokeid, err := strconv.Atoi(c.Param("jokeID")); err == nil {

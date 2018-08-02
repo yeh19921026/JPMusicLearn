@@ -1,9 +1,14 @@
-mixin navitem(hrf,txt)
+mixin nava(hrf,txt)
   li.nav-item
-  a.nav-link(href=hrf)= txt
-    block
-+navitem('#', '登入')
-+navitem('#', '歌曲列表')
+    a.nav-link(href=hrf)= txt
+      block
+mixin navlink(hrf,txt)
+  li.nav-item
+    Link.nav-link(to=hrf)= txt
+      block
+li.nav-item
+    a.nav-link(href='#',onClick='{this.authenticate}')登入
++navlink('/searchresult', '歌曲列表')
 //-li(class="nav-item")
   a(class='nav-link',href='#') 登入
 //-li(class="nav-item")

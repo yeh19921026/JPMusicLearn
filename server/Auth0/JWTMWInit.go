@@ -40,6 +40,7 @@ func JWTInit() {
 				return result, nil
 			},
 			SigningMethod: jwt.SigningMethodRS256,
+			//UserProperty:  "sub",
 		})
 	jwtMiddleWare = jwtMiddleware
 }
@@ -54,6 +55,17 @@ func AuthMiddleware() gin.HandlerFunc {
 			c.Writer.WriteHeader(http.StatusUnauthorized)
 			c.Writer.Write([]byte("Unauthorized"))
 		}
+		/*send a request to auth0 to get id token
+		url := "https://tses.auth0.com/userinfo"
 
+		req, _ := http.NewRequest("GET", url, nil)
+		req.Header.Add("Authorization", c.Request.Header.Get("Authorization"))
+		req.Header.Add("content-type", "application/json")
+
+		res, _ := http.DefaultClient.Do(req)
+
+		defer res.Body.Close()
+		body, _ := ioutil.ReadAll(res.Body)
+		fmt.Println("string(body):", string(body))*/
 	}
 }
