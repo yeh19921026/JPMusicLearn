@@ -3210,6 +3210,10 @@ var _container2 = _interopRequireDefault(_container);
 
 var _reactRouterDom = __webpack_require__(6);
 
+var _jwtDecode = __webpack_require__(26);
+
+var _jwtDecode2 = _interopRequireDefault(_jwtDecode);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3220,7 +3224,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var AUTH0_CLIENT_ID = "KF8oNwg3qrbhlT5pMeuJ5OL0IAiIt5PZ";
 var AUTH0_DOMAIN = "tses.auth0.com";
-var AUTH0_CALLBACK_URL = location.href;
+var AUTH0_CALLBACK_URL = "http://localhost:3000/"; //location.href;
 var AUTH0_API_AUDIENCE = "https://tses.auth0.com/api/v2/";
 
 var App = function (_React$Component) {
@@ -3268,10 +3272,44 @@ var App = function (_React$Component) {
 			}
 		}
 	}, {
+		key: 'pushUserinfo',
+		value: function pushUserinfo() {
+			if (localStorage.getItem("id_token")) {
+				var userinfo = (0, _jwtDecode2.default)(localStorage.getItem("id_token"));
+				console.log(userinfo);
+				$.ajax({
+					type: 'POST', //GET or POST
+					url: AUTH0_CALLBACK_URL + "api/updateuserinfo", //請求的頁面
+					cache: false, //防止抓到快取的回應
+					contentType: "application/json;charset=utf-8", data: JSON.stringify(userinfo),
+					success: function success(msg) {
+						console.log("msg = " + msg);
+
+						//當請求成功後此事件會被呼叫
+						for (var i = 0; i < msg.length; i++) {
+							console.log("name=" + msg[i]["欄位名稱"]);
+						}
+						//localStorage.setItem("",msg);
+					},
+					error: function error(xhr, ajaxOpetion, thrownError) {
+						//當請求失敗後此事件會被呼叫.
+						console.log(xhr.status);
+						console.log(thrownError);
+					},
+					statusCode: { //狀態碼處理
+						404: function _() {
+							alert("error");
+						}
+					}
+				});
+			}
+		}
+	}, {
 		key: 'componentWillMount',
 		value: function componentWillMount() {
 			this.setup();
 			this.parseHash();
+			this.pushUserinfo();
 		}
 	}, {
 		key: 'render',
@@ -4728,6 +4766,122 @@ var UnvarifyAlert = function (_React$Component) {
 }(React.Component);
 
 exports.default = Song;
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var base64_url_decode = __webpack_require__(27);
+
+function InvalidTokenError(message) {
+  this.message = message;
+}
+
+InvalidTokenError.prototype = new Error();
+InvalidTokenError.prototype.name = 'InvalidTokenError';
+
+module.exports = function (token,options) {
+  if (typeof token !== 'string') {
+    throw new InvalidTokenError('Invalid token specified');
+  }
+
+  options = options || {};
+  var pos = options.header === true ? 0 : 1;
+  try {
+    return JSON.parse(base64_url_decode(token.split('.')[pos]));
+  } catch (e) {
+    throw new InvalidTokenError('Invalid token specified: ' + e.message);
+  }
+};
+
+module.exports.InvalidTokenError = InvalidTokenError;
+
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var atob = __webpack_require__(28);
+
+function b64DecodeUnicode(str) {
+  return decodeURIComponent(atob(str).replace(/(.)/g, function (m, p) {
+    var code = p.charCodeAt(0).toString(16).toUpperCase();
+    if (code.length < 2) {
+      code = '0' + code;
+    }
+    return '%' + code;
+  }));
+}
+
+module.exports = function(str) {
+  var output = str.replace(/-/g, "+").replace(/_/g, "/");
+  switch (output.length % 4) {
+    case 0:
+      break;
+    case 2:
+      output += "==";
+      break;
+    case 3:
+      output += "=";
+      break;
+    default:
+      throw "Illegal base64url string!";
+  }
+
+  try{
+    return b64DecodeUnicode(output);
+  } catch (err) {
+    return atob(output);
+  }
+};
+
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports) {
+
+/**
+ * The code was extracted from:
+ * https://github.com/davidchambers/Base64.js
+ */
+
+var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+
+function InvalidCharacterError(message) {
+  this.message = message;
+}
+
+InvalidCharacterError.prototype = new Error();
+InvalidCharacterError.prototype.name = 'InvalidCharacterError';
+
+function polyfill (input) {
+  var str = String(input).replace(/=+$/, '');
+  if (str.length % 4 == 1) {
+    throw new InvalidCharacterError("'atob' failed: The string to be decoded is not correctly encoded.");
+  }
+  for (
+    // initialize result and counters
+    var bc = 0, bs, buffer, idx = 0, output = '';
+    // get next character
+    buffer = str.charAt(idx++);
+    // character found in table? initialize bit storage and add its ascii value;
+    ~buffer && (bs = bc % 4 ? bs * 64 + buffer : buffer,
+      // and if not first of each 4 characters,
+      // convert the first 8 bits to one ascii character
+      bc++ % 4) ? output += String.fromCharCode(255 & bs >> (-2 * bc & 6)) : 0
+  ) {
+    // try to find character in table (0-63, not found => -1)
+    buffer = chars.indexOf(buffer);
+  }
+  return output;
+}
+
+
+module.exports = typeof window !== 'undefined' && window.atob && window.atob.bind(window) || polyfill;
+
 
 /***/ })
 /******/ ]);

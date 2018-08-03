@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"test/golang-gin-react/command"
 	"test/golang-gin-react/dbmgo"
 
@@ -11,6 +12,9 @@ import (
 var Bglog *logs.BeeLogger
 
 func main() {
+	s1 := "中文"
+	b1 := []byte(s1)
+	fmt.Println(string(b1))
 	dbmgo.MgoInit()
 	//dbmgo.TestType()
 	command.CommandInit()

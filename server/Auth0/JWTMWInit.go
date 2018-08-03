@@ -22,6 +22,7 @@ func JWTInit() {
 				//varify audience
 				aud := os.Getenv("AUTH0_API_AUDIENCE")
 				checkAudience := token.Claims.(jwt.MapClaims).VerifyAudience(aud, false)
+				//fmt.Println(token.Claims.(jwt.MapClaims)["aud"])
 				if !checkAudience {
 					return token, errors.New("Invalid audience")
 				}
@@ -55,6 +56,7 @@ func AuthMiddleware() gin.HandlerFunc {
 			c.Writer.WriteHeader(http.StatusUnauthorized)
 			c.Writer.Write([]byte("Unauthorized"))
 		}
+		//fmt.Println(c.Request)
 		/*send a request to auth0 to get id token
 		url := "https://tses.auth0.com/userinfo"
 

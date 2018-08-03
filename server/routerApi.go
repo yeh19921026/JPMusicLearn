@@ -29,7 +29,7 @@ func RouterApi(router *gin.Engine) error {
 		})
 	}
 	api.GET("/jokes", auth0.AuthMiddleware(), jokeHandler)
-	api.GET("/usersetting", auth0.AuthMiddleware(), userSettingHandler)
+	api.POST("/updateuserinfo", auth0.AuthMiddleware(), updateUserinfoHandler)
 	api.POST("/jokes/like/:jokeID", auth0.AuthMiddleware(), likeJoke)
 	return nil
 }
@@ -53,7 +53,6 @@ func userSettingHandler(c *gin.Context) {
 	fmt.Println("1", user.(*jwt.Token).Claims.(jwt.MapClaims)["sub"])
 	*/
 	c.JSON(http.StatusOK, result)
-
 }
 func likeJoke(c *gin.Context) {
 	if jokeid, err := strconv.Atoi(c.Param("jokeID")); err == nil {

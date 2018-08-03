@@ -5,9 +5,11 @@ import {
 	Route,
 	Link
 } from 'react-router-dom';
+import jwtdecode from 'jwt-decode';
+
 const AUTH0_CLIENT_ID = "KF8oNwg3qrbhlT5pMeuJ5OL0IAiIt5PZ"
 const AUTH0_DOMAIN = "tses.auth0.com"
-const AUTH0_CALLBACK_URL = location.href;
+const AUTH0_CALLBACK_URL = "http://localhost:3000/";//location.href;
 const AUTH0_API_AUDIENCE = "https://tses.auth0.com/api/v2/"
 
 class App extends React.Component {
@@ -46,10 +48,42 @@ class App extends React.Component {
 			});
 		}
 	}
+	pushUserinfo() {
+		if (localStorage.getItem("id_token")) {
+			var userinfo = jwtdecode(localStorage.getItem("id_token"));
+			console.log(userinfo);
+			$.ajax({
+				type: 'POST',//GET or POST
+				url:
+					AUTH0_CALLBACK_URL + "api/updateuserinfo",//請求的頁面
+				cache: false,//防止抓到快取的回應
+				contentType: "application/json;charset=utf-8", data: JSON.stringify(userinfo),
+				success: function (msg) {
+					console.log("msg = " + msg);
+
+					//當請求成功後此事件會被呼叫
+					for (var i = 0; i < msg.length; i++) {
+						console.log("name=" + msg[i]["欄位名稱"]);
+					}
+					//localStorage.setItem("",msg);
+				},
+				error: function (xhr, ajaxOpetion, thrownError) {
+					//當請求失敗後此事件會被呼叫.
+					console.log(xhr.status);
+					console.log(thrownError);
+				},
+				statusCode: {//狀態碼處理
+					404: function () {
+						alert("error");
+					}
+				}
+			});
+		}
+	}
 	componentWillMount() {
 		this.setup();
 		this.parseHash();
-
+		this.pushUserinfo();
 	}
 	render() {
 		return (
